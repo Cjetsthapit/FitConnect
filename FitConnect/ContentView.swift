@@ -7,15 +7,25 @@
 
 import SwiftUI
 
-
-
-
-
 struct ContentView: View {
     
-    @State private var selection: String? = nil
+    @State private var showMainContent = false
     var body: some View {
-      Register()
+        ZStack {
+            if showMainContent {
+                Register()
+            } else {
+                SplashScreen()
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            withAnimation {
+                                    // Switch to the main content view after 2 seconds
+                                showMainContent = true
+                            }
+                        }
+                    }
+            }
+        }
     }
 }
 

@@ -21,6 +21,9 @@
 		5A136DC72B6C856A001DD7DF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 5A136DC62B6C856A001DD7DF /* FirebaseFirestore */; };
 		5A136DCC2B6C9DAD001DD7DF /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A136DCB2B6C9DAD001DD7DF /* Login.swift */; };
 		5A136DCE2B6D25CF001DD7DF /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A136DCD2B6D25CF001DD7DF /* Register.swift */; };
+		5A136E072B6D4578001DD7DF /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A136E062B6D4578001DD7DF /* Color+Hex.swift */; };
+		5A136E0A2B6D47D0001DD7DF /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A136E092B6D47D0001DD7DF /* SplashScreen.swift */; };
+		5AB378B12B6ECD1F0019B1D7 /* FCTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB378B02B6ECD1E0019B1D7 /* FCTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +57,9 @@
 		5A136DBD2B6C834D001DD7DF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5A136DCB2B6C9DAD001DD7DF /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		5A136DCD2B6D25CF001DD7DF /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
+		5A136E062B6D4578001DD7DF /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
+		5A136E092B6D47D0001DD7DF /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		5AB378B02B6ECD1E0019B1D7 /* FCTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +114,8 @@
 		5A136D912B6C821E001DD7DF /* FitConnect */ = {
 			isa = PBXGroup;
 			children = (
+				5AB378AF2B6ECD010019B1D7 /* Shared */,
+				5A136E052B6D4566001DD7DF /* Utilities */,
 				5A136DBC2B6C8238001DD7DF /* Features */,
 				5A136D922B6C821E001DD7DF /* FitConnectApp.swift */,
 				5A136D942B6C821E001DD7DF /* ContentView.swift */,
@@ -154,6 +162,7 @@
 		5A136DC82B6C9CDE001DD7DF /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				5A136E082B6D47B9001DD7DF /* SplashScreen */,
 				5A136DCA2B6C9D06001DD7DF /* Register */,
 				5A136DC92B6C9CFA001DD7DF /* Login */,
 			);
@@ -174,6 +183,30 @@
 				5A136DCD2B6D25CF001DD7DF /* Register.swift */,
 			);
 			path = Register;
+			sourceTree = "<group>";
+		};
+		5A136E052B6D4566001DD7DF /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				5A136E062B6D4578001DD7DF /* Color+Hex.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		5A136E082B6D47B9001DD7DF /* SplashScreen */ = {
+			isa = PBXGroup;
+			children = (
+				5A136E092B6D47D0001DD7DF /* SplashScreen.swift */,
+			);
+			path = SplashScreen;
+			sourceTree = "<group>";
+		};
+		5AB378AF2B6ECD010019B1D7 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				5AB378B02B6ECD1E0019B1D7 /* FCTextField.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,6 +349,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A136E0A2B6D47D0001DD7DF /* SplashScreen.swift in Sources */,
+				5A136E072B6D4578001DD7DF /* Color+Hex.swift in Sources */,
+				5AB378B12B6ECD1F0019B1D7 /* FCTextField.swift in Sources */,
 				5A136DCC2B6C9DAD001DD7DF /* Login.swift in Sources */,
 				5A136DCE2B6D25CF001DD7DF /* Register.swift in Sources */,
 				5A136D952B6C821E001DD7DF /* ContentView.swift in Sources */,

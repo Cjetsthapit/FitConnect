@@ -1,9 +1,9 @@
-//
-//  Signup.swift
-//  FitConnect
-//
-//  Created by Srijeet Sthapit on 2024-02-02.
-//
+    //
+    //  Signup.swift
+    //  FitConnect
+    //
+    //  Created by Srijeet Sthapit on 2024-02-02.
+    //
 
 import Foundation
 import SwiftUI
@@ -20,52 +20,58 @@ struct Register: View {
     @State var confirmPassword : String = ""
     let db = Firestore.firestore()
     var body: some View {
-            VStack {
-                TextField("Fullname", text: $fullname) .textFieldStyle(RoundedBorderTextFieldStyle())
-                
-                TextField("Address", text: $address) .textFieldStyle(RoundedBorderTextFieldStyle())
-                  
-                TextField("Contact number", text: $contactNumber) .textFieldStyle(RoundedBorderTextFieldStyle())
-             
-                TextField("Email", text: $email) .textFieldStyle(RoundedBorderTextFieldStyle())
+        Color("Background") // Replace with your desired background color
+            .edgesIgnoringSafeArea(.all) // This ensures the color fills the entire screen
+            .overlay(
+                VStack {
+                    FCTextField(placeholder: "Fullname", value: $fullname)
                     
-                TextField("Username", text: $username) .textFieldStyle(RoundedBorderTextFieldStyle())
-                
-                TextField("Password", text: $password) .textFieldStyle(RoundedBorderTextFieldStyle())
+                    FCTextField(placeholder:"Address", value: $address)
                     
-                TextField("Confirm Password", text: $confirmPassword) .textFieldStyle(RoundedBorderTextFieldStyle())
-                   
-              
-
+                    FCTextField(placeholder:"Contact number", value: $contactNumber)
+                    
+                    FCTextField(placeholder:"Email", value: $email)
+                    
+                    FCTextField(placeholder:"Username", value: $username)
+                    
+                    FCTextField(placeholder:"Password", value: $password)
+                    
+                    FCTextField(placeholder:"Confirm Password", value: $confirmPassword)
+                    
                     Button("Register"){
                         Task {
-                               do {
-                                   let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
-                                   if let user = Auth.auth().currentUser {
-                                       let uid = user.uid
-                                       do {
-                                           try await Firestore.firestore().collection("users").document(uid).setData([
+                            do {
+                                let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
+                                if let user = Auth.auth().currentUser {
+                                    let uid = user.uid
+                                    do {
+                                        try await Firestore.firestore().collection("users").document(uid).setData([
                                             "email": email,
                                             "fullName": fullname,
                                             "address": address,
                                             "contactNumber": contactNumber,
                                             "userName": username
-                                           ])
-                                           print("Sign-up and Firestore data addition successful")
-                                       } catch {
-                                           print("Firestore error: \(error.localizedDescription)")
-                                       }
-                                   }
-                               } catch {
-                                   print("Sign-up error: \(error.localizedDescription)")
-                               }
-                           }
+                                        ])
+                                        print("Sign-up and Firestore data addition successful")
+                                    } catch {
+                                        print("Firestore error: \(error.localizedDescription)")
+                                    }
+                                }
+                            } catch {
+                                print("Sign-up error: \(error.localizedDescription)")
+                            }
+                        }
                     }
-                     
-            }
-            .padding()
-       
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color(hex: 0x00AB53)) // Custom RGB values
+                    .cornerRadius(10)
+                    
+                }
+                    .padding()
+            )
     }
+    
 }
 
 #Preview {
