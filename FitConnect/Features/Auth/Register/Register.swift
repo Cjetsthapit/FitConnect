@@ -11,71 +11,106 @@ import FirebaseAuth
 import FirebaseFirestore
 
 struct Register: View {
-    @State var fullname : String = ""
-    @State var address : String = ""
-    @State var contactNumber : String = ""
-    @State var username : String = ""
-    @State var email : String = ""
-    @State var password : String = ""
-    @State var confirmPassword : String = ""
+    @State var fullname: String = ""
+    @State var address: String = ""
+    @State var contactNumber: String = ""
+    @State var username: String = ""
+    @State var email: String = ""
+    @State var password: String = ""
+    @State var confirmPassword: String = ""
     let db = Firestore.firestore()
+
     var body: some View {
-        Color("Background") // Replace with your desired background color
-            .edgesIgnoringSafeArea(.all) // This ensures the color fills the entire screen
-            .overlay(
-                    VStack {
-                        FCTextField(placeholder: "Fullname", value: $fullname)
-                        
-                        FCTextField(placeholder:"Address", value: $address)
-                        
-                        FCTextField(placeholder:"Contact number", value: $contactNumber)
-                        
-                        FCTextField(placeholder:"Email", value: $email)
-                        
-                        FCTextField(placeholder:"Username", value: $username)
-                        
-                        FCTextField(placeholder:"Password", value: $password)
-                        
-                        FCTextField(placeholder:"Confirm Password", value: $confirmPassword)
-                        
-                        Button("Register"){
-                            Task {
-                                do {
-                                    let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
-                                    if let user = Auth.auth().currentUser {
-                                        let uid = user.uid
-                                        do {
-                                            try await Firestore.firestore().collection("users").document(uid).setData([
-                                                "email": email,
-                                                "fullName": fullname,
-                                                "address": address,
-                                                "contactNumber": contactNumber,
-                                                "userName": username
-                                            ])
-                                            print("Sign-up and Firestore data addition successful")
-                                        } catch {
-                                            print("Firestore error: \(error.localizedDescription)")
+        ZStack {
+            Color(hex: 0xF2F2F2) // Background color
+                .edgesIgnoringSafeArea(.all)
+            
+            VStack {
+                Image("Logo") // Replace "your_logo" with the name of your logo image asset
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                
+                Text("Your All-In-One\nFitness Companion")
+                    .font(.title3)
+                    .multilineTextAlignment(.center)
+                    .padding(.bottom, 20)
+                
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color.white)
+                    .padding()
+                    .overlay(
+                        VStack(spacing: 22) {
+                            FCTextField(placeholder: "Fullname", value: $fullname)
+                                .frame(height: 30)
+                                .frame(width: 280)
+                            
+                            FCTextField(placeholder: "Address", value: $address)
+                                .frame(height: 30)
+                                .frame(width: 280)
+                            
+                            FCTextField(placeholder: "Contact number", value: $contactNumber)
+                                .frame(height: 30)
+                                .frame(width: 280)
+                            
+                            FCTextField(placeholder: "Email", value: $email)
+                                .frame(height: 30)
+                                .frame(width: 280)
+                            
+                            FCTextField(placeholder: "Username", value: $username)
+                                .frame(height: 30)
+                                .frame(width: 280)
+                            
+                            FCTextField(placeholder: "Password", value: $password)
+                                .frame(height: 30)
+                                .frame(width: 280)
+                            
+                            FCTextField(placeholder: "Confirm Password", value: $confirmPassword)
+                                .frame(height: 30)
+                                .frame(width: 280)
+                            
+                            Button("Register") {
+                                Task {
+                                    do {
+                                        let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
+                                        if let user = Auth.auth().currentUser {
+                                            let uid = user.uid
+                                            do {
+                                                try await Firestore.firestore().collection("users").document(uid).setData([
+                                                    "email": email,
+                                                    "fullName": fullname,
+                                                    "address": address,
+                                                    "contactNumber": contactNumber,
+                                                    "userName": username
+                                                ])
+                                                print("Sign-up and Firestore data addition successful")
+                                            } catch {
+                                                print("Firestore error: \(error.localizedDescription)")
+                                            }
                                         }
+                                    } catch {
+                                        print("Sign-up error: \(error.localizedDescription)")
                                     }
-                                } catch {
-                                    print("Sign-up error: \(error.localizedDescription)")
                                 }
                             }
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color(hex: 0x00AB53))
+                            .cornerRadius(10)
+                            
+                            HStack {
+                                Text("Already a member?")
+                            }
                         }
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color(hex: 0x00AB53)) // Custom RGB values
-                        .cornerRadius(10)
-                        HStack{
-                            Text("Already a member?")
-                        }
-                    }
-                    .padding()
-            )
+                    )
+            }
+            .padding()
+        }
     }
-    
 }
 
-#Preview {
-    Register()
+struct Register_Previews: PreviewProvider {
+    static var previews: some View {
+        Register()
+    }
 }
