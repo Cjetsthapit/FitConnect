@@ -12,11 +12,11 @@ import FirebaseAuth
 struct Login: View {
     @State var email: String = ""
     @State var password: String = ""
-    @State private var isEmailValid: Bool = false
-    @State private var isPasswordValid: Bool = false
+    @State private var isEmailValid: Bool = true
+    @State private var isPasswordValid: Bool = true
     @State private var isLoginButtonDisabled: Bool = true
     @State var path = NavigationPath()
-    
+    @State var message = ""
     var body: some View {
         ZStack {
             Color(hex: 0xF2F2F2) // Background color
@@ -48,20 +48,46 @@ struct Login: View {
                                 .background(Color.gray.opacity(0.2))
                                 .cornerRadius(8)
                                 .padding(.horizontal, 20)
-                                .onChange(of: email,initial:true) { value,newValue in
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke((isEmailValid) ? Color.clear : Color.red, lineWidth: 2)
+                                        .padding(.horizontal, 20)// Border color changes based on the error state
+                                )
+                                .onChange(of: email,initial:false) { value,newValue in
                                     isEmailValid = isValidEmail(newValue)
                                     updateLoginButtonState()
                                 }
+                            if !isEmailValid {
+                                Text("Invalid email format")
+                                    .foregroundColor(.red)
+                                    .font(.caption) // Smaller font size
+                                
+                            }
                             
                             SecureField("Password", text: $password)
                                 .padding()
                                 .background(Color.gray.opacity(0.2))
                                 .cornerRadius(8)
                                 .padding(.horizontal, 20)
-                                .onChange(of: password, initial:true) {value, newValue in
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke((isPasswordValid) ? Color.clear : Color.red, lineWidth: 2)
+                                        .padding(.horizontal, 20)// Border color changes based on the error state
+                                )
+                                .onChange(of: password, initial:false) {value, newValue in
                                     isPasswordValid = isValidPassword(newValue)
                                     updateLoginButtonState()
                                 }
+                            
+                            if !isPasswordValid {
+                                Text("must be greater than 6 characters")
+                                    .foregroundColor(.red)
+                                    .font(.caption) // Smaller font size
+                                
+                            }
+                            if(message.count > 0){
+                                Text(message).foregroundColor(.red) .font(.caption)
+                            }
                             
                             Button(action: login, label: {
                                 Text("Login")
@@ -114,12 +140,14 @@ struct Login: View {
             // Proceed with authentication
         Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
             if let error = error {
+                message = error.localizedDescription
                 print("Login error:", error.localizedDescription)
                     // Handle login errors here
                 return
             }
                 // User successfully logged in
             if let user = authResult?.user {
+                message = "Successfully Logged in"
                 print("User logged in:", user)
                     // You can redirect or perform any other actions here after successful login
             }

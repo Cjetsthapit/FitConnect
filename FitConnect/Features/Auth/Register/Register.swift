@@ -22,6 +22,7 @@ struct Register: View {
     @State private var isPasswordValid: Bool = true
     @State private var isConfirmPasswordValid: Bool = true
     @State private var isRegisterButtonDisabled: Bool = true
+    @State private var backendError: String = ""
     
     let db = Firestore.firestore()
     private func isValidFullName(_ fullName: String) -> Bool {
@@ -126,7 +127,7 @@ struct Register: View {
                                 Text("Invalid email format")
                                     .foregroundColor(.red)
                                     .font(.caption) // Smaller font size
-                             
+                                
                             }
                             
                             
@@ -168,7 +169,7 @@ struct Register: View {
                                     updateRegisterButtonState()
                                 })
                             if !isPasswordValid {
-                                Text("Invalid phone number")
+                                Text("must be greater than 6 characters")
                                     .foregroundColor(.red)
                                     .font(.caption) // Smaller font size
                                 
@@ -190,11 +191,15 @@ struct Register: View {
                                     updateRegisterButtonState()
                                 })
                             if !isConfirmPasswordValid {
-                                Text("Invalid phone number")
+                                Text("Does not match with password")
                                     .foregroundColor(.red)
                                     .font(.caption) // Smaller font size
                                 
                             }
+                            if(backendError.count > 0){
+                                Text(backendError).foregroundColor(.red) .font(.caption)
+                            }
+                            
                             
                             Button(action: {Task{await register()}}, label: {
                                 Text("Register")
@@ -222,53 +227,55 @@ struct Register: View {
                         
                     )
             }
-           
+            
         }
-    
+        
         
     }
-}
-
-
-
-
-
-func signUpAndAddUserData(email: String, password: String, fullname: String, contactNumber: String ) async {
-    do {
-        let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
-        
-        if let user = Auth.auth().currentUser {
-            let uid = user.uid
+    func signUpAndAddUserData(email: String, password: String, fullname: String, contactNumber: String ) async {
+        do {
+            let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
             
-                // Perform Firestore data addition concurrently with authentication
-            async let firestoreTask: () = addUserDataToFirestore(uid: uid, email: email, fullname: fullname, contactNumber: contactNumber)
-            
-                // Wait for both tasks to complete
-            _ = try await (authResult, firestoreTask)
-            
-            print("Sign-up and Firestore data addition successful")
+            if let user = Auth.auth().currentUser {
+                let uid = user.uid
+                
+                    // Perform Firestore data addition concurrently with authentication
+                async let firestoreTask: () = addUserDataToFirestore(uid: uid, email: email, fullname: fullname, contactNumber: contactNumber)
+                
+                    // Wait for both tasks to complete
+                _ = try await (authResult, firestoreTask)
+                backendError = "Sign-up and Firestore data addition successful"
+                print("Sign-up and Firestore data addition successful")
+            }
+        } catch {
+            backendError = error.localizedDescription
+            print("Sign-up error: \(error.localizedDescription)")
         }
-    } catch {
-        print("Sign-up error: \(error.localizedDescription)")
+        
     }
     
+    func addUserDataToFirestore(uid: String, email: String, fullname: String, contactNumber: String) async throws {
+        do {
+            try await Firestore.firestore().collection("users").document(uid).setData([
+                "email": email,
+                "fullName": fullname,
+                "contactNumber": contactNumber,
+                
+            ])
+            
+            print("Firestore data addition successful")
+        } catch {
+            throw error
+        }
+        
+    }
 }
 
-func addUserDataToFirestore(uid: String, email: String, fullname: String, contactNumber: String) async throws {
-    do {
-        try await Firestore.firestore().collection("users").document(uid).setData([
-            "email": email,
-            "fullName": fullname,
-            "contactNumber": contactNumber,
-            
-        ])
-        
-        print("Firestore data addition successful")
-    } catch {
-        throw error
-    }
-    
-}
+
+
+
+
+
 struct Register_Previews: PreviewProvider {
     static var previews: some View {
         Register()
