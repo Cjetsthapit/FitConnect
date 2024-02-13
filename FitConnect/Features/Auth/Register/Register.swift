@@ -23,31 +23,27 @@ struct Register: View {
     @State private var isConfirmPasswordValid: Bool = true
     @State private var isRegisterButtonDisabled: Bool = true
     @State private var backendError: String = ""
+    let toggleView: () -> Void
     
     let db = Firestore.firestore()
     private func isValidFullName(_ fullName: String) -> Bool {
-            // Simple validation for full name (for example, at least 3 characters)
         return fullName.count >= 3
     }
     
     private func isValidEmail(_ email: String) -> Bool {
-            // Simple email validation
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
     }
     
     private func isValidContact(_ contact: String) -> Bool {
-            // Simple validation for contact number (for example, at least 10 digits)
         return contact.count >= 10
     }
     
     private func isValidPassword(_ password: String) -> Bool {
-            // Simple password validation (for example, at least 6 characters)
         return password.count >= 6
     }
     
     private func isValidConfirmPassword(_ confirmPassword: String) -> Bool {
-            // Simple validation to check if confirmPassword matches password
         return confirmPassword == password
     }
     
@@ -65,170 +61,168 @@ struct Register: View {
     }
     var body: some View {
         ZStack {
-            Color(hex: 0xF2F2F2) // Background color
+            Color(hex: 0xF2F2F2)
                 .edgesIgnoringSafeArea(.all)
                 .ignoresSafeArea()
-            VStack {
-                Image("Logo") // Replace "your_logo" with the name of your logo image asset
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 100)
-                
-                Text("Your All-In-One\nFitness Companion")
-                    .font(.title3)
-                    .multilineTextAlignment(.center)
-                    .padding(.bottom, 20)
-                
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color.white)
-                    .foregroundColor(Color.black)
-                    .padding()
-                    .overlay(
-                        VStack(spacing: 22) {
-                            TextField("Full Name", text: $fullname)
-                                .padding()
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(8)
-                                .padding(.horizontal, 20)
-                                .foregroundColor(.black)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .stroke(isFullNameValid ? Color.clear : Color.red, lineWidth: 2)
-                                        .padding(.horizontal, 20)// Border color changes based on the error state
-                                )
-                                .onChange(of: fullname, perform: { newValue in
-                                    isFullNameValid = isValidFullName(newValue)
-                                    updateRegisterButtonState()
-                                })
-                            
-                            if !isFullNameValid {
-                                Text("Must be greater than 3 characters")
-                                    .foregroundColor(.red)
-                                    .font(.caption) // Smaller font size
-                                
-                            }
-                            
-                            TextField("Email", text: $email)
-                                .padding()
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(8)
-                                .padding(.horizontal, 20)
-                                .foregroundColor(.black)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .stroke(isEmailValid ? Color.clear : Color.red, lineWidth: 2)
-                                        .padding(.horizontal, 20)// Border color changes based on the error state
-                                )
-                                .onChange(of: email, perform: { newValue in
-                                    isEmailValid = isValidEmail(newValue)
-                                    updateRegisterButtonState()
-                                })
-                            if !isEmailValid {
-                                Text("Invalid email format")
-                                    .foregroundColor(.red)
-                                    .font(.caption) // Smaller font size
-                                
-                            }
-                            
-                            
-                            TextField("Contact", text: $contactNumber)
-                                .padding()
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(8)
-                                .padding(.horizontal, 20)
-                                .foregroundColor(.black)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .stroke(isContactValid ? Color.clear : Color.red, lineWidth: 2)
-                                        .padding(.horizontal, 20)// Border color changes based on the error state
-                                )
-                                .onChange(of: contactNumber, perform:{ newValue in
-                                    isContactValid = isValidContact(newValue)
-                                    updateRegisterButtonState()
-                                })
-                            if !isContactValid {
-                                Text("Invalid phone number")
-                                    .foregroundColor(.red)
-                                    .font(.caption) // Smaller font size
-                                
-                            }
-                            
-                            SecureField("Password", text: $password)
-                                .padding()
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(8)
-                                .padding(.horizontal, 20)
-                                .foregroundColor(.black)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .stroke((isPasswordValid) ? Color.clear : Color.red, lineWidth: 2)
-                                        .padding(.horizontal, 20)// Border color changes based on the error state
-                                )
-                                .onChange(of: password, perform: { newValue in
-                                    isPasswordValid = isValidPassword(newValue)
-                                    updateRegisterButtonState()
-                                })
-                            if !isPasswordValid {
-                                Text("must be greater than 6 characters")
-                                    .foregroundColor(.red)
-                                    .font(.caption) // Smaller font size
-                                
-                            }
-                            
-                            SecureField("Confirm Password", text: $confirmPassword)
-                                .padding()
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(8)
-                                .padding(.horizontal, 20)
-                                .foregroundColor(.black)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .stroke(( isConfirmPasswordValid) ? Color.clear : Color.red, lineWidth: 2)
-                                        .padding(.horizontal, 20)// Border color changes based on the error state
-                                )
-                                .onChange(of: confirmPassword, perform: { newValue in
-                                    isConfirmPasswordValid = isValidConfirmPassword(newValue)
-                                    updateRegisterButtonState()
-                                })
-                            if !isConfirmPasswordValid {
-                                Text("Does not match with password")
-                                    .foregroundColor(.red)
-                                    .font(.caption) // Smaller font size
-                                
-                            }
-                            if(backendError.count > 0){
-                                Text(backendError).foregroundColor(.red) .font(.caption)
-                            }
-                            
-                            
-                            Button(action: {Task{await register()}}, label: {
-                                Text("Register")
-                                    .foregroundColor(.white)
+         
+                VStack {
+                    Image("Logo") // Replace "your_logo" with the name of your logo image asset
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 100)
+                    
+                    Text("Your All-In-One\nFitness Companion")
+                        .font(.title3)
+                        .multilineTextAlignment(.center)
+                        .padding(.bottom, 20)
+                    
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color.white)
+                        .foregroundColor(Color.black)
+                        .padding()
+                        .overlay(
+                            VStack(spacing: 22) {
+                                TextField("Full Name", text: $fullname)
                                     .padding()
-                                    .frame(maxWidth: .infinity)
-                                    .background(isRegisterButtonDisabled ? Color.gray.opacity(0.5) : Color("Primary"))
+                                    .background(Color.gray.opacity(0.2))
                                     .cornerRadius(8)
                                     .padding(.horizontal, 20)
-                            })
-                            .disabled(isRegisterButtonDisabled)
-                            .padding(.top, 20)
-                            HStack {
-                                Text("Already member?")
                                     .foregroundColor(.black)
-                                Button("Login") {
-                                    print("Here")
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .stroke(isFullNameValid ? Color.clear : Color.red, lineWidth: 2)
+                                            .padding(.horizontal, 20)// Border color changes based on the error state
+                                    )
+                                    .onChange(of: fullname, perform: { newValue in
+                                        isFullNameValid = isValidFullName(newValue)
+                                        updateRegisterButtonState()
+                                    })
+                                
+                                if !isFullNameValid {
+                                    Text("Must be greater than 3 characters")
+                                        .foregroundColor(.red)
+                                        .font(.caption) // Smaller font size
                                     
-                                }.foregroundColor(.black)
+                                }
+                                
+                                TextField("Email", text: $email)
+                                    .padding()
+                                    .background(Color.gray.opacity(0.2))
+                                    .cornerRadius(8)
+                                    .padding(.horizontal, 20)
+                                    .foregroundColor(.black)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .stroke(isEmailValid ? Color.clear : Color.red, lineWidth: 2)
+                                            .padding(.horizontal, 20)// Border color changes based on the error state
+                                    )
+                                    .onChange(of: email, perform: { newValue in
+                                        isEmailValid = isValidEmail(newValue)
+                                        updateRegisterButtonState()
+                                    })
+                                if !isEmailValid {
+                                    Text("Invalid email format")
+                                        .foregroundColor(.red)
+                                        .font(.caption) // Smaller font size
+                                    
+                                }
+                                
+                                
+                                TextField("Contact", text: $contactNumber)
+                                    .padding()
+                                    .background(Color.gray.opacity(0.2))
+                                    .cornerRadius(8)
+                                    .padding(.horizontal, 20)
+                                    .foregroundColor(.black)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .stroke(isContactValid ? Color.clear : Color.red, lineWidth: 2)
+                                            .padding(.horizontal, 20)// Border color changes based on the error state
+                                    )
+                                    .onChange(of: contactNumber, perform:{ newValue in
+                                        isContactValid = isValidContact(newValue)
+                                        updateRegisterButtonState()
+                                    })
+                                if !isContactValid {
+                                    Text("Invalid phone number")
+                                        .foregroundColor(.red)
+                                        .font(.caption) // Smaller font size
+                                    
+                                }
+                                
+                                SecureField("Password", text: $password)
+                                    .padding()
+                                    .background(Color.gray.opacity(0.2))
+                                    .cornerRadius(8)
+                                    .padding(.horizontal, 20)
+                                    .foregroundColor(.black)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .stroke((isPasswordValid) ? Color.clear : Color.red, lineWidth: 2)
+                                            .padding(.horizontal, 20)// Border color changes based on the error state
+                                    )
+                                    .onChange(of: password, perform: { newValue in
+                                        isPasswordValid = isValidPassword(newValue)
+                                        updateRegisterButtonState()
+                                    })
+                                if !isPasswordValid {
+                                    Text("must be greater than 6 characters")
+                                        .foregroundColor(.red)
+                                        .font(.caption) // Smaller font size
+                                    
+                                }
+                                
+                                SecureField("Confirm Password", text: $confirmPassword)
+                                    .padding()
+                                    .background(Color.gray.opacity(0.2))
+                                    .cornerRadius(8)
+                                    .padding(.horizontal, 20)
+                                    .foregroundColor(.black)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .stroke(( isConfirmPasswordValid) ? Color.clear : Color.red, lineWidth: 2)
+                                            .padding(.horizontal, 20)// Border color changes based on the error state
+                                    )
+                                    .onChange(of: confirmPassword, perform: { newValue in
+                                        isConfirmPasswordValid = isValidConfirmPassword(newValue)
+                                        updateRegisterButtonState()
+                                    })
+                                if !isConfirmPasswordValid {
+                                    Text("Does not match with password")
+                                        .foregroundColor(.red)
+                                        .font(.caption) // Smaller font size
+                                    
+                                }
+                                if(backendError.count > 0){
+                                    Text(backendError).foregroundColor(.red) .font(.caption)
+                                }
+                                
+                                
+                                Button(action: {Task{await register()}}, label: {
+                                    Text("Register")
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .frame(maxWidth: .infinity)
+                                        .background(isRegisterButtonDisabled ? Color.gray.opacity(0.5) : Color("Primary"))
+                                        .cornerRadius(8)
+                                        .padding(.horizontal, 20)
+                                })
+                                .disabled(isRegisterButtonDisabled)
+                                .padding(.top, 20)
+                                HStack {
+                                    Text("Not a member yet?")
+                                    Button("Register"){
+                                        toggleView()
+                                    }
+                                }
                             }
-                        }
-                            .foregroundColor(.white)
-                            .padding()
-                            .cornerRadius(10)
-                        
-                    )
+                                .padding()
+                                .cornerRadius(10)
+                            
+                        )
+                }
             }
-            
-        }
+        
         
         
     }
@@ -246,6 +240,7 @@ struct Register: View {
                 _ = try await (authResult, firestoreTask)
                 backendError = "Sign-up and Firestore data addition successful"
                 print("Sign-up and Firestore data addition successful")
+                toggleView()
             }
         } catch {
             backendError = error.localizedDescription
@@ -276,8 +271,8 @@ struct Register: View {
 
 
 
-struct Register_Previews: PreviewProvider {
-    static var previews: some View {
-        Register()
-    }
-}
+//struct Register_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Register()
+//    }
+//}

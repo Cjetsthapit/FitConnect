@@ -17,12 +17,18 @@ struct Login: View {
     @State private var isLoginButtonDisabled: Bool = true
     @State var path = NavigationPath()
     @State var message = ""
+    @ObservedObject var user:  UserState
+    
+    let toggleView: () -> Void
+    
     var body: some View {
+
         ZStack {
-            Color(hex: 0xF2F2F2) // Background color
+            Color(hex: 0xF2F2F2)
                 .edgesIgnoringSafeArea(.all)
                 .ignoresSafeArea()
-            
+   
+             
             VStack {
                 
                 Image("Logo") // Replace "your_logo" with the name of your logo image asset
@@ -38,6 +44,7 @@ struct Login: View {
                 
                 RoundedRectangle(cornerRadius: 20)
                     .fill(Color.white)
+                    .foregroundColor(Color.black)
                     .padding(.top,100)
                     .padding(.bottom,100)
                     .overlay(
@@ -101,18 +108,19 @@ struct Login: View {
                             .disabled(isLoginButtonDisabled)
                             .padding(.top, 20)
                             
-                            
                             HStack {
                                 Text("Not a member yet?")
-                                Button("Register") {
-                                    print("Here")
-                                    
+                                Button("Register"){
+                                    toggleView()
                                 }
                             }
                         }
                     )
             }
             .padding()
+             
+                
+            
         }
     }
     private func login() {
@@ -146,8 +154,9 @@ struct Login: View {
                 return
             }
                 // User successfully logged in
-            if let user = authResult?.user {
+            if let authUser = authResult?.user {
                 message = "Successfully Logged in"
+                user.userId = authUser.uid
                 print("User logged in:", user)
                     // You can redirect or perform any other actions here after successful login
             }
@@ -169,8 +178,8 @@ struct Login: View {
     }
 }
 
-struct Login_Previews: PreviewProvider {
-    static var previews: some View {
-        Login()
-    }
-}
+//struct Login_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Login()
+//    }
+//}

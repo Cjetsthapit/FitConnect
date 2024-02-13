@@ -6,14 +6,35 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct ContentView: View {
     
     @State private var showMainContent = false
+    @State private var uid:String=""
+    @State private var showRegisterView = false
+    @StateObject var user = UserState()
+    
     var body: some View {
         ZStack {
             if showMainContent {
-                Login()
+                if user.userId == nil {
+
+                        if !showRegisterView {
+                            Login(user:user, toggleView: {showRegisterView.toggle()})
+                          
+                        } else {
+                            Register(toggleView: {showRegisterView.toggle()})
+                        }
+                    
+                }
+                else {
+                    NavigationStack{
+                        Dashboard()
+                    }
+                  
+                }
+             
             } else {
                 SplashScreen()
                     .onAppear {
@@ -27,7 +48,9 @@ struct ContentView: View {
             }
         }
     }
+    
 }
+
 
 #Preview {
     ContentView()
