@@ -11,7 +11,9 @@ import FirebaseAuth
 class UserState: ObservableObject {
     @Published var userId: String?
     init(userId: String? = nil) {
-        self.userId = userId
+        if let authUser =  Auth.auth().currentUser {
+            self.userId = authUser.uid
+        }
     }
    
 }

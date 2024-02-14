@@ -30,7 +30,7 @@ struct ContentView: View {
                 }
                 else {
                     NavigationStack{
-                        Dashboard()
+                        Dashboard(user:user)
                     }
                   
                 }
