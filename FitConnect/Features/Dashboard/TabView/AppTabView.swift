@@ -20,6 +20,9 @@ struct AppTabView: View{
                 .tag("Activity")
                 .tabItem{Image(systemName: "trophy")}
                 .environmentObject(manager)
+            MacroView()
+                .tag("Macro")
+                .tabItem{Image(systemName: "fork.knife")}
             UserView()
                 .tag("User")
                 .tabItem{Image(systemName: "person.circle")}

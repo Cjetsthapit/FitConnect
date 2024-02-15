@@ -25,6 +25,14 @@ struct Dashboard: View {
                 print("Error signing out: %@", signOutError)
             }
         }
+        .task{
+            do{
+                try await OpenAiService.shared.sendPromptToChatGPT(message: "raw chicken breast")
+            }catch{
+                print("Here")
+                print(error.localizedDescription)
+            }
+        }
         
     }
 }

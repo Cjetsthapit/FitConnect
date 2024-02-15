@@ -23,6 +23,12 @@
 		5A136E072B6D4578001DD7DF /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A136E062B6D4578001DD7DF /* Color+Hex.swift */; };
 		5A136E0A2B6D47D0001DD7DF /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A136E092B6D47D0001DD7DF /* SplashScreen.swift */; };
 		5A3C618D2B76935C0051DB9C /* UserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3C618C2B76935C0051DB9C /* UserState.swift */; };
+		5A8ECB202B7DC72600D43B74 /* MacroRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8ECB1F2B7DC72600D43B74 /* MacroRequestModel.swift */; };
+		5A8ECB222B7DC73700D43B74 /* MacroResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8ECB212B7DC73700D43B74 /* MacroResponseModel.swift */; };
+		5A8ECB252B7DC7B300D43B74 /* MacroOpenAIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8ECB242B7DC7B300D43B74 /* MacroOpenAIService.swift */; };
+		5A8ECB272B7DC7DC00D43B74 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8ECB262B7DC7DC00D43B74 /* Secrets.swift */; };
+		5A8ECB292B7DD36000D43B74 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8ECB282B7DD36000D43B74 /* Formatter.swift */; };
+		5A8ECB2B2B7DD6E600D43B74 /* MacroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8ECB2A2B7DD6E600D43B74 /* MacroView.swift */; };
 		5AB378B12B6ECD1F0019B1D7 /* FCTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB378B02B6ECD1E0019B1D7 /* FCTextField.swift */; };
 		5AB378B42B6F3BAB0019B1D7 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB378B32B6F3BAB0019B1D7 /* Dashboard.swift */; };
 		7DED4B5D2B7DADAD0017935F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DED4B5C2B7DADAD0017935F /* HomeView.swift */; };
@@ -67,6 +73,12 @@
 		5A136E062B6D4578001DD7DF /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		5A136E092B6D47D0001DD7DF /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		5A3C618C2B76935C0051DB9C /* UserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserState.swift; sourceTree = "<group>"; };
+		5A8ECB1F2B7DC72600D43B74 /* MacroRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroRequestModel.swift; sourceTree = "<group>"; };
+		5A8ECB212B7DC73700D43B74 /* MacroResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroResponseModel.swift; sourceTree = "<group>"; };
+		5A8ECB242B7DC7B300D43B74 /* MacroOpenAIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroOpenAIService.swift; sourceTree = "<group>"; };
+		5A8ECB262B7DC7DC00D43B74 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		5A8ECB282B7DD36000D43B74 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		5A8ECB2A2B7DD6E600D43B74 /* MacroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroView.swift; sourceTree = "<group>"; };
 		5AB378B02B6ECD1E0019B1D7 /* FCTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCTextField.swift; sourceTree = "<group>"; };
 		5AB378B32B6F3BAB0019B1D7 /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
 		7DED4B5C2B7DADAD0017935F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -131,6 +143,7 @@
 		5A136D912B6C821E001DD7DF /* FitConnect */ = {
 			isa = PBXGroup;
 			children = (
+				5A8ECB232B7DC76E00D43B74 /* Services */,
 				7DED4B6A2B7DB7C50017935F /* FitConnect.entitlements */,
 				5A3C618B2B76934A0051DB9C /* Class */,
 				5AB378AF2B6ECD010019B1D7 /* Shared */,
@@ -209,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				5A136E062B6D4578001DD7DF /* Color+Hex.swift */,
+				5A8ECB282B7DD36000D43B74 /* Formatter.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -225,8 +239,19 @@
 			isa = PBXGroup;
 			children = (
 				5A3C618C2B76935C0051DB9C /* UserState.swift */,
+				5A8ECB1F2B7DC72600D43B74 /* MacroRequestModel.swift */,
+				5A8ECB212B7DC73700D43B74 /* MacroResponseModel.swift */,
+				5A8ECB262B7DC7DC00D43B74 /* Secrets.swift */,
 			);
 			path = Class;
+			sourceTree = "<group>";
+		};
+		5A8ECB232B7DC76E00D43B74 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5A8ECB242B7DC7B300D43B74 /* MacroOpenAIService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		5AB378AF2B6ECD010019B1D7 /* Shared */ = {
@@ -263,6 +288,7 @@
 				7DED4B5C2B7DADAD0017935F /* HomeView.swift */,
 				7DED4B5E2B7DAE340017935F /* UserView.swift */,
 				7DED4B602B7DAE410017935F /* ActivityView.swift */,
+				5A8ECB2A2B7DD6E600D43B74 /* MacroView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -423,20 +449,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A8ECB272B7DC7DC00D43B74 /* Secrets.swift in Sources */,
 				5A3C618D2B76935C0051DB9C /* UserState.swift in Sources */,
+				5A8ECB292B7DD36000D43B74 /* Formatter.swift in Sources */,
 				7DED4B612B7DAE410017935F /* ActivityView.swift in Sources */,
 				5A136E0A2B6D47D0001DD7DF /* SplashScreen.swift in Sources */,
 				7DED4B632B7DAEB10017935F /* AppTabView.swift in Sources */,
 				7DED4B692B7DB6790017935F /* HealthManager.swift in Sources */,
 				5A136E072B6D4578001DD7DF /* Color+Hex.swift in Sources */,
+				5A8ECB252B7DC7B300D43B74 /* MacroOpenAIService.swift in Sources */,
 				5AB378B42B6F3BAB0019B1D7 /* Dashboard.swift in Sources */,
 				7DED4B5D2B7DADAD0017935F /* HomeView.swift in Sources */,
 				5AB378B12B6ECD1F0019B1D7 /* FCTextField.swift in Sources */,
 				7DED4B5F2B7DAE340017935F /* UserView.swift in Sources */,
+				5A8ECB2B2B7DD6E600D43B74 /* MacroView.swift in Sources */,
 				5A136DCC2B6C9DAD001DD7DF /* Login.swift in Sources */,
 				5A136DCE2B6D25CF001DD7DF /* Register.swift in Sources */,
 				5A136D952B6C821E001DD7DF /* ContentView.swift in Sources */,
 				7DED4B662B7DAFC90017935F /* ActivityCard.swift in Sources */,
+				5A8ECB202B7DC72600D43B74 /* MacroRequestModel.swift in Sources */,
+				5A8ECB222B7DC73700D43B74 /* MacroResponseModel.swift in Sources */,
 				5A136D932B6C821E001DD7DF /* FitConnectApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
