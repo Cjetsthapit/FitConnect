@@ -25,6 +25,12 @@
 		5A3C618D2B76935C0051DB9C /* UserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3C618C2B76935C0051DB9C /* UserState.swift */; };
 		5AB378B12B6ECD1F0019B1D7 /* FCTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB378B02B6ECD1E0019B1D7 /* FCTextField.swift */; };
 		5AB378B42B6F3BAB0019B1D7 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB378B32B6F3BAB0019B1D7 /* Dashboard.swift */; };
+		7DED4B5D2B7DADAD0017935F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DED4B5C2B7DADAD0017935F /* HomeView.swift */; };
+		7DED4B5F2B7DAE340017935F /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DED4B5E2B7DAE340017935F /* UserView.swift */; };
+		7DED4B612B7DAE410017935F /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DED4B602B7DAE410017935F /* ActivityView.swift */; };
+		7DED4B632B7DAEB10017935F /* AppTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DED4B622B7DAEB10017935F /* AppTabView.swift */; };
+		7DED4B662B7DAFC90017935F /* ActivityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DED4B652B7DAFC90017935F /* ActivityCard.swift */; };
+		7DED4B692B7DB6790017935F /* HealthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DED4B682B7DB6790017935F /* HealthManager.swift */; };
 		E021D34C2B731E6D00F700D1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E021D34B2B731E6D00F700D1 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +69,13 @@
 		5A3C618C2B76935C0051DB9C /* UserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserState.swift; sourceTree = "<group>"; };
 		5AB378B02B6ECD1E0019B1D7 /* FCTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCTextField.swift; sourceTree = "<group>"; };
 		5AB378B32B6F3BAB0019B1D7 /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
+		7DED4B5C2B7DADAD0017935F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		7DED4B5E2B7DAE340017935F /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
+		7DED4B602B7DAE410017935F /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		7DED4B622B7DAEB10017935F /* AppTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabView.swift; sourceTree = "<group>"; };
+		7DED4B652B7DAFC90017935F /* ActivityCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCard.swift; sourceTree = "<group>"; };
+		7DED4B682B7DB6790017935F /* HealthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthManager.swift; sourceTree = "<group>"; };
+		7DED4B6A2B7DB7C50017935F /* FitConnect.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitConnect.entitlements; sourceTree = "<group>"; };
 		E021D34B2B731E6D00F700D1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,6 +131,7 @@
 		5A136D912B6C821E001DD7DF /* FitConnect */ = {
 			isa = PBXGroup;
 			children = (
+				7DED4B6A2B7DB7C50017935F /* FitConnect.entitlements */,
 				5A3C618B2B76934A0051DB9C /* Class */,
 				5AB378AF2B6ECD010019B1D7 /* Shared */,
 				5A136E052B6D4566001DD7DF /* Utilities */,
@@ -226,9 +240,47 @@
 		5AB378B22B6F3B940019B1D7 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				7DED4B672B7DB66B0017935F /* HealthManager */,
+				7DED4B642B7DAFBE0017935F /* ActivityCard */,
+				7DED4B5B2B7DADA40017935F /* Views */,
+				7DED4B562B7DAC820017935F /* TabView */,
 				5AB378B32B6F3BAB0019B1D7 /* Dashboard.swift */,
 			);
 			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		7DED4B562B7DAC820017935F /* TabView */ = {
+			isa = PBXGroup;
+			children = (
+				7DED4B622B7DAEB10017935F /* AppTabView.swift */,
+			);
+			path = TabView;
+			sourceTree = "<group>";
+		};
+		7DED4B5B2B7DADA40017935F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7DED4B5C2B7DADAD0017935F /* HomeView.swift */,
+				7DED4B5E2B7DAE340017935F /* UserView.swift */,
+				7DED4B602B7DAE410017935F /* ActivityView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7DED4B642B7DAFBE0017935F /* ActivityCard */ = {
+			isa = PBXGroup;
+			children = (
+				7DED4B652B7DAFC90017935F /* ActivityCard.swift */,
+			);
+			path = ActivityCard;
+			sourceTree = "<group>";
+		};
+		7DED4B672B7DB66B0017935F /* HealthManager */ = {
+			isa = PBXGroup;
+			children = (
+				7DED4B682B7DB6790017935F /* HealthManager.swift */,
+			);
+			path = HealthManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,13 +424,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A3C618D2B76935C0051DB9C /* UserState.swift in Sources */,
+				7DED4B612B7DAE410017935F /* ActivityView.swift in Sources */,
 				5A136E0A2B6D47D0001DD7DF /* SplashScreen.swift in Sources */,
+				7DED4B632B7DAEB10017935F /* AppTabView.swift in Sources */,
+				7DED4B692B7DB6790017935F /* HealthManager.swift in Sources */,
 				5A136E072B6D4578001DD7DF /* Color+Hex.swift in Sources */,
 				5AB378B42B6F3BAB0019B1D7 /* Dashboard.swift in Sources */,
+				7DED4B5D2B7DADAD0017935F /* HomeView.swift in Sources */,
 				5AB378B12B6ECD1F0019B1D7 /* FCTextField.swift in Sources */,
+				7DED4B5F2B7DAE340017935F /* UserView.swift in Sources */,
 				5A136DCC2B6C9DAD001DD7DF /* Login.swift in Sources */,
 				5A136DCE2B6D25CF001DD7DF /* Register.swift in Sources */,
 				5A136D952B6C821E001DD7DF /* ContentView.swift in Sources */,
+				7DED4B662B7DAFC90017935F /* ActivityCard.swift in Sources */,
 				5A136D932B6C821E001DD7DF /* FitConnectApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -540,11 +598,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FitConnect/FitConnect.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FitConnect/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to enjoy all the features of our application";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -567,11 +627,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FitConnect/FitConnect.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FitConnect/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to enjoy all the features of our application";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

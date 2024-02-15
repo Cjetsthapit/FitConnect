@@ -13,7 +13,8 @@ struct Dashboard: View {
     
     var body: some View {
         
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+       
+        AppTabView()
                
         Button("Signout"){
             let firebaseAuth = Auth.auth()

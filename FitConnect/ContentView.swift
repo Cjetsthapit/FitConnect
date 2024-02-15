@@ -14,6 +14,7 @@ struct ContentView: View {
     @State private var uid:String=""
     @State private var showRegisterView = false
     @StateObject var user = UserState()
+    @StateObject var manager = HealthManager()
     
     var body: some View {
         ZStack {
@@ -31,6 +32,7 @@ struct ContentView: View {
                 else {
                     NavigationStack{
                         Dashboard(user:user)
+                            .environmentObject(manager)
                     }
                   
                 }
