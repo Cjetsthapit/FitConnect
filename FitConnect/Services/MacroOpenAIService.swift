@@ -64,21 +64,22 @@ class OpenAiService{
         return urlRequest
     }
     
-    func sendPromptToChatGPT(message: String) async throws{
+    func sendPromptToChatGPT(message: String) async throws -> MacroResponse{
         let urlRequest = try generateURLRequest(httpMethod: .post, message: message)
         
         let (data, _) = try await URLSession.shared.data(for: urlRequest)
         
         let result = try JSONDecoder().decode(GPTResponse.self, from: data)
         
-//        let args = result.choices[0].message.functionCall.arguments
-//        guard let argData = args.data(using: .utf8) else{
-//            throw URLError(.badURL)
-//        }
-//        let macro = try JSONDecoder().decode(MacroResponse.self, from: argData)
+        let args = result.choices[0].message.functionCall.arguments
+        guard let argData = args.data(using: .utf8) else{
+            throw URLError(.badURL)
+        }
+        let macro = try JSONDecoder().decode(MacroResponse.self, from: argData)
         
         print(result.choices[0])
-//        print(macro)
+        print(macro)
+        return macro
 //                    print(String(data: data, encoding:.utf8)!)
     }
     

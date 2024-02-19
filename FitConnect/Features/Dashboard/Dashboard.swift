@@ -27,7 +27,7 @@ struct Dashboard: View {
         }
         .task{
             do{
-                try await OpenAiService.shared.sendPromptToChatGPT(message: "raw chicken breast")
+                try await OpenAiService.shared.sendPromptToChatGPT(message: "pizza")
             }catch{
                 print("Here")
                 print(error.localizedDescription)

@@ -22,6 +22,7 @@
 		5A136DCE2B6D25CF001DD7DF /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A136DCD2B6D25CF001DD7DF /* Register.swift */; };
 		5A136E072B6D4578001DD7DF /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A136E062B6D4578001DD7DF /* Color+Hex.swift */; };
 		5A136E0A2B6D47D0001DD7DF /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A136E092B6D47D0001DD7DF /* SplashScreen.swift */; };
+		5A20FB6E2B83F8FA0086E00D /* AddMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A20FB6D2B83F8FA0086E00D /* AddMacro.swift */; };
 		5A3C618D2B76935C0051DB9C /* UserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3C618C2B76935C0051DB9C /* UserState.swift */; };
 		5A8ECB202B7DC72600D43B74 /* MacroRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8ECB1F2B7DC72600D43B74 /* MacroRequestModel.swift */; };
 		5A8ECB222B7DC73700D43B74 /* MacroResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8ECB212B7DC73700D43B74 /* MacroResponseModel.swift */; };
@@ -72,6 +73,7 @@
 		5A136DCD2B6D25CF001DD7DF /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		5A136E062B6D4578001DD7DF /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		5A136E092B6D47D0001DD7DF /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		5A20FB6D2B83F8FA0086E00D /* AddMacro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMacro.swift; sourceTree = "<group>"; };
 		5A3C618C2B76935C0051DB9C /* UserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserState.swift; sourceTree = "<group>"; };
 		5A8ECB1F2B7DC72600D43B74 /* MacroRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroRequestModel.swift; sourceTree = "<group>"; };
 		5A8ECB212B7DC73700D43B74 /* MacroResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroResponseModel.swift; sourceTree = "<group>"; };
@@ -235,6 +237,15 @@
 			path = SplashScreen;
 			sourceTree = "<group>";
 		};
+		5A20FB6C2B83F8020086E00D /* MacroView */ = {
+			isa = PBXGroup;
+			children = (
+				5A8ECB2A2B7DD6E600D43B74 /* MacroView.swift */,
+				5A20FB6D2B83F8FA0086E00D /* AddMacro.swift */,
+			);
+			path = MacroView;
+			sourceTree = "<group>";
+		};
 		5A3C618B2B76934A0051DB9C /* Class */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,10 +296,10 @@
 		7DED4B5B2B7DADA40017935F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5A20FB6C2B83F8020086E00D /* MacroView */,
 				7DED4B5C2B7DADAD0017935F /* HomeView.swift */,
 				7DED4B5E2B7DAE340017935F /* UserView.swift */,
 				7DED4B602B7DAE410017935F /* ActivityView.swift */,
-				5A8ECB2A2B7DD6E600D43B74 /* MacroView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -459,6 +470,7 @@
 				5A136E072B6D4578001DD7DF /* Color+Hex.swift in Sources */,
 				5A8ECB252B7DC7B300D43B74 /* MacroOpenAIService.swift in Sources */,
 				5AB378B42B6F3BAB0019B1D7 /* Dashboard.swift in Sources */,
+				5A20FB6E2B83F8FA0086E00D /* AddMacro.swift in Sources */,
 				7DED4B5D2B7DADAD0017935F /* HomeView.swift in Sources */,
 				5AB378B12B6ECD1F0019B1D7 /* FCTextField.swift in Sources */,
 				7DED4B5F2B7DAE340017935F /* UserView.swift in Sources */,
