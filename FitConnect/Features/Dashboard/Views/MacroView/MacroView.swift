@@ -19,22 +19,15 @@ struct MacroView: View {
         VStack{
             Text("Today's intake")
             HStack(){
-                CircularProgressBar(progress: self.$carbValue, title: "Carbs")
-                    
-                    .onAppear(){
-                        self.carbValue = fitConnect.totalCarb
-                    }.padding()
-                CircularProgressBar(progress: self.$proteinValue,title: "Protein")
-            
-                    .onAppear(){
-                        self.proteinValue = fitConnect.totalProtein
+                CircularProgressBar(progress: self.$fitConnect.totalCarb, title: "Carbs")
+                    .padding()
+                
+                CircularProgressBar(progress: self.$fitConnect.totalProtein, title: "Protein")
+                    .padding()
+                
+                CircularProgressBar(progress: self.$fitConnect.totalFat, title: "Fats")
+                    .padding()
 
-                    }.padding()
-                CircularProgressBar(progress: self.$fatValue,title: "Fats")
-            
-                    .onAppear(){
-                        self.fatValue = fitConnect.totalFat
-                    }.padding()
             }
             .padding()
                 .toolbar{
@@ -54,7 +47,7 @@ struct MacroView: View {
             AddMacro(foodName: self.$foodName, date: self.$date, showingForm: self.$showingForm)
         }
         .onAppear(){
-            print(fitConnect.totalCarb)
+            print("Total carb: ",fitConnect.totalCarb)
         }
     }
 }

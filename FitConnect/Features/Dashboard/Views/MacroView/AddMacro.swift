@@ -13,6 +13,7 @@ struct AddMacro: View {
     @Binding var foodName: String
     @Binding var date: Date
     @Binding var showingForm: Bool
+    @EnvironmentObject var fitConnect:  FitConnectData
     
     var body: some View {
         NavigationView {
@@ -30,7 +31,8 @@ struct AddMacro: View {
                                 print("FOod is ", foodName)
                                 let resp = try await OpenAiService.shared.sendPromptToChatGPT( message: foodName)
                                 try await addMacro(macro: resp, date: date)
-//                                showingForm = false
+                                fitConnect.fetchFitConnectData()
+                                showingForm = false
                             }catch{
                                 print(error.localizedDescription)
                             }
