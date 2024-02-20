@@ -8,35 +8,17 @@
 import SwiftUI
 import FirebaseAuth
 struct Dashboard: View {
-    
-    @ObservedObject var user: UserState
+    @EnvironmentObject var fitConnect:  FitConnectData
+
     
     var body: some View {
-        
        
         AppTabView()
-               
-        Button("Signout"){
-            let firebaseAuth = Auth.auth()
-            do {
-                try firebaseAuth.signOut()
-                user.userId = nil
-            } catch let signOutError as NSError {
-                print("Error signing out: %@", signOutError)
-            }
-        }
-        .task{
-            do{
-                try await OpenAiService.shared.sendPromptToChatGPT(message: "pizza")
-            }catch{
-                print("Here")
-                print(error.localizedDescription)
-            }
-        }
         
+
     }
 }
 
 #Preview {
-    Dashboard(user:UserState())
+    Dashboard()
 }

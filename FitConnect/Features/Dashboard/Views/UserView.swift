@@ -7,10 +7,19 @@
 
 import Foundation
 import SwiftUI
-
+import FirebaseAuth
 struct UserView: View{
+    @EnvironmentObject var fitConnect:  FitConnectData
     var body: some View {
-        Text("user")
+        Button("Logout"){
+            let firebaseAuth = Auth.auth()
+            do {
+                try firebaseAuth.signOut()
+                fitConnect.userId = nil
+            } catch let signOutError as NSError {
+                print("Error signing out: %@", signOutError)
+            }
+        }
     }
 }
 

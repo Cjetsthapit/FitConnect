@@ -17,7 +17,8 @@ struct Login: View {
     @State private var isLoginButtonDisabled: Bool = true
     @State var path = NavigationPath()
     @State var message = ""
-    @ObservedObject var user:  UserState
+//    @ObservedObject var user:  UserState
+    @EnvironmentObject var fitConnect:  FitConnectData
     
     let toggleView: () -> Void
     
@@ -156,8 +157,8 @@ struct Login: View {
                 // User successfully logged in
             if let authUser = authResult?.user {
                 message = "Successfully Logged in"
-                user.userId = authUser.uid
-                print("User logged in:", user)
+                fitConnect.userId = authUser.uid
+   
                     // You can redirect or perform any other actions here after successful login
             }
         }

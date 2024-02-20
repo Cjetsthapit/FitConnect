@@ -13,16 +13,15 @@ struct ContentView: View {
     @State private var showMainContent = false
     @State private var uid:String=""
     @State private var showRegisterView = false
-    @StateObject var user = UserState()
     @StateObject var manager = HealthManager()
-    
+    @EnvironmentObject var fitConnect:  FitConnectData
     var body: some View {
         ZStack {
             if showMainContent {
-                if user.userId == nil {
+                if fitConnect.userId == nil {
 
                         if !showRegisterView {
-                            Login(user:user, toggleView: {showRegisterView.toggle()})
+                            Login( toggleView: {showRegisterView.toggle()})
                           
                         } else {
                             Register(toggleView: {showRegisterView.toggle()})
@@ -31,7 +30,7 @@ struct ContentView: View {
                 }
                 else {
                     NavigationStack{
-                        Dashboard(user:user)
+                        Dashboard()
                             .environmentObject(manager)
                     }
                   
