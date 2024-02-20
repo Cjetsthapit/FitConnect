@@ -29,6 +29,20 @@ struct MacroView: View {
                     .padding()
 
             }
+            List {
+                ForEach(fitConnect.fitConnectData?.food ?? [], id: \.self) { macro in
+                    VStack(alignment: .leading) {
+                        Text("Food: \(macro.food)")
+//                        Text("Date: \(macro.date)")
+                        Text("Protein: \(macro.protein.formattedString())")
+                        Text("Carb: \(macro.carb.formattedString())")
+                        Text("Fat: \(macro.fat.formattedString())")
+                    }
+                }
+            }
+//            List(fitConnect.fitConnectData!.food, id: \.self) { item in
+//                Text(item.food)
+//            }
             .padding()
                 .toolbar{
                     ToolbarItem{

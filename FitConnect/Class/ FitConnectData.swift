@@ -66,7 +66,7 @@ struct FitConnectResponse: Decodable{
     let food: [Macro]
 }
 
-struct Macro: Decodable{
+struct Macro: Decodable, Hashable{
     let food: String
     let date: Date
     let protein: Double
