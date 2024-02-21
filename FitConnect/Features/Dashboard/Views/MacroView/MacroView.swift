@@ -31,18 +31,38 @@ struct MacroView: View {
             }
             List {
                 ForEach(fitConnect.fitConnectData?.food ?? [], id: \.self) { macro in
-                    VStack(alignment: .leading) {
-                        Text("Food: \(macro.food)")
-//                        Text("Date: \(macro.date)")
-                        Text("Protein: \(macro.protein.formattedString())")
-                        Text("Carb: \(macro.carb.formattedString())")
-                        Text("Fat: \(macro.fat.formattedString())")
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("\(macro.food.capitalized)")
+                            .font(.headline)
+                        
+                        HStack(spacing: 16) {
+                            VStack(alignment: .leading, spacing: 4) {
+                                HStack {
+                                    Image(systemName: "flame")
+                                    Text("Fat:")
+                                }
+                                HStack {
+                                    Image(systemName: "leaf")
+                                    Text("Protein:")
+                                }
+                                HStack {
+                                    Image(systemName: "tennis.racket.circle")
+                                    Text("Carb:")
+                                }
+                            }
+                            
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("\(macro.fat.formattedString()) gm")
+                                    .font(.subheadline)
+                                Text("\(macro.protein.formattedString()) gm")
+                                    .font(.subheadline)
+                                Text("\(macro.carb.formattedString()) gm")
+                                    .font(.subheadline)
+                            }
+                        }
                     }
                 }
             }
-//            List(fitConnect.fitConnectData!.food, id: \.self) { item in
-//                Text(item.food)
-//            }
             .padding()
                 .toolbar{
                     ToolbarItem{
@@ -50,7 +70,6 @@ struct MacroView: View {
                             showingForm.toggle()
                         }
                     label: {
-                            //                    Image(systemName: "plus").foregroundColor(.black)
                         Text("Add Data")
                     }
                     }
