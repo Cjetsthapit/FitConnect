@@ -3,7 +3,10 @@
 //  FitConnect
 //
 //  Created by Srijeet Sthapit on 2024-02-01.
-//
+//  Nibha Maharjan 301282952
+//  Srijeet Sthapit 301365217
+//  Abi Chitrakar 301369773
+//  Saurav Gautam 301286980
 
 import SwiftUI
 import FirebaseCore
