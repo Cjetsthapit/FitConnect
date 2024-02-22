@@ -27,14 +27,20 @@ class HealthManager: ObservableObject{
     
     @Published var mockActivities: [String: Activity] = [
         "todaySteps": Activity(id: 0, title: "Todays steps", subtitle: "Goal 10,000", image: "figure.walk", tintColor: .green, amount:"10000"),
-        "todayCalories": Activity(id: 1, title: "Todays Calories", subtitle: "Goal 900", image: "figure.step.training", tintColor: .red, amount:"2000")
+        "todayCalories": Activity(id: 1, title: "Todays Calories", subtitle: "Goal 900", image: "figure.step.training", tintColor: .red, amount:"2000"),
+        "todayrunning": Activity(id: 2, title: "Running", subtitle: "Mins ran this week", image: "figure.walk", tintColor: .green, amount: "12 minutes"),
+        "todaystrengths": Activity(id: 3, title: "Weight Lifting", subtitle: "This week", image: "dumbbell", tintColor: .red, amount: "25 minutes"),
+        "todaysoccer": Activity(id: 4, title: "Soccer", subtitle: "This week", image: "soccerball.inverse", tintColor: .blue, amount: "12 minutes"),
+        "todayBasketball": Activity(id: 5, title: "Basketball", subtitle: "This week", image: "basketball", tintColor: .yellow, amount: "12 minutes"),
+        "todaystair": Activity(id: 6, title: "Stairs", subtitle: "This week", image: "figure.stairs", tintColor: .yellow, amount: "12 minutes"),
+        "todaykick": Activity(id: 7, title: "Kick Boxing", subtitle: "This week", image: "figure.kickboxing", tintColor: .green, amount: "12 minutes")
     ]
     
     init(){
         let steps = HKQuantityType(.stepCount)
         let calories = HKQuantityType(.activeEnergyBurned)
         let workout = HKObjectType.workoutType()
-        let healthTypes: Set = [steps, calories]
+        let healthTypes: Set = [steps, calories,workout]
         
         Task{
             do{
@@ -147,7 +153,7 @@ class HealthManager: ObservableObject{
                 
             }
             let runningActivity = Activity(id: 2, title: "Running", subtitle: "Mins ran this week", image: "figure.walk", tintColor: .green, amount: "\(runningCount) minutes")
-            let strengthActivity = Activity(id: 3, title: "Weight Lifting", subtitle: "This week", image: "figure.dumbell", tintColor: .red, amount: "\(StrengthCount) minutes")
+            let strengthActivity = Activity(id: 3, title: "Weight Lifting", subtitle: "This week", image: "figure.dumbbell", tintColor: .red, amount: "\(StrengthCount) minutes")
             let soccerActivity = Activity(id: 4, title: "Soccer", subtitle: "This week", image: "soccerball.inverse", tintColor: .blue, amount: "\(soccerCount) minutes")
             let basketballActivity = Activity(id: 5, title: "Basketball", subtitle: "This week", image: "basketball", tintColor: .yellow, amount: "\(BasketballCount) minutes")
             let stairActivity = Activity(id: 6, title: "Stairs", subtitle: "This week", image: "figure.stairs", tintColor: .yellow, amount: "\(stairsCount) minutes")
