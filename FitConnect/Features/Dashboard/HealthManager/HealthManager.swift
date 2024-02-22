@@ -8,6 +8,7 @@
 import Foundation
 import HealthKit
 
+//Date extraction
 extension Date{
     static var startOfDay: Date{
         Calendar.current.startOfDay(for: Date())
@@ -25,11 +26,12 @@ class HealthManager: ObservableObject{
     
     @Published var activities: [String: Activity] = [:]
     
+    //MockActivities for testing purpose
     @Published var mockActivities: [String: Activity] = [
         "todaySteps": Activity(id: 0, title: "Todays steps", subtitle: "Goal 10,000", image: "figure.walk", tintColor: .green, amount:"10000"),
         "todayCalories": Activity(id: 1, title: "Todays Calories", subtitle: "Goal 900", image: "figure.step.training", tintColor: .red, amount:"2000"),
         "todayrunning": Activity(id: 2, title: "Running", subtitle: "Mins ran this week", image: "figure.walk", tintColor: .green, amount: "12 minutes"),
-        "todaystrengths": Activity(id: 3, title: "Weight Lifting", subtitle: "This week", image: "dumbbell", tintColor: .red, amount: "25 minutes"),
+        "todaystrengths": Activity(id: 3, title: "Weight Lifting", subtitle: "This week", image: "scalemass", tintColor: .red, amount: "25 minutes"),
         "todaysoccer": Activity(id: 4, title: "Soccer", subtitle: "This week", image: "soccerball.inverse", tintColor: .blue, amount: "12 minutes"),
         "todayBasketball": Activity(id: 5, title: "Basketball", subtitle: "This week", image: "basketball", tintColor: .yellow, amount: "12 minutes"),
         "todaystair": Activity(id: 6, title: "Stairs", subtitle: "This week", image: "figure.stairs", tintColor: .yellow, amount: "12 minutes"),
@@ -40,8 +42,9 @@ class HealthManager: ObservableObject{
         let steps = HKQuantityType(.stepCount)
         let calories = HKQuantityType(.activeEnergyBurned)
         let workout = HKObjectType.workoutType()
-        let healthTypes: Set = [steps, calories,workout]
+        let healthTypes: Set = [steps, calories,workout] //Requesting Access for steps, calories and workouts
         
+        //Show our data from fetch
         Task{
             do{
                 try await healthStore.requestAuthorization(toShare: [], read: healthTypes)
@@ -53,6 +56,8 @@ class HealthManager: ObservableObject{
             }
         }
     }
+    
+    //Fetch steps
     func fetchTodaySteps(){
         let steps = HKQuantityType(.stepCount)
 
@@ -74,6 +79,7 @@ class HealthManager: ObservableObject{
         healthStore.execute(query)
     }
     
+    //Fetch Todays Calories
     func fetchTodayCalories(){
         let calories = HKQuantityType(.activeEnergyBurned)
         let predicate = HKQuery.predicateForSamples(withStart: .startOfDay, end: Date())
@@ -92,29 +98,7 @@ class HealthManager: ObservableObject{
         }
         healthStore.execute(query)
     }
-//    func fetchWeekRunningStats(){
-//            let workout = HKSampleType.workoutType()
-//            let timePredicate = HKQuery.predicateForSamples(withStart: .startOfWeek, end: Date())
-//            let workoutPredicate = HKQuery.predicateForWorkouts(with: .running)
-//            let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [timePredicate,workoutPredicate])
-//            let query = HKSampleQuery(sampleType: workout, predicate: predicate, limit: 25, sortDescriptors: nil) { _, sample, error in
-//                guard let workouts = sample as? [HKWorkout], error == nil else {
-//                    print ("error fetchin todays calories")
-//                    return
-//                }
-//                var count:Int = 0
-//                for workout in workouts {
-//                    let duration = Int(workout.duration)/60
-//                    count += duration
-//                }
-//                let activity = Activity(id: 2, title: "Running", subtitle: "Mins ran this week", image: "figure.walk", tintColor: .green, amount: "\(count) minutes")
-//                
-//                DispatchQueue.main.async{
-//                    self.activities["weekRunning"] = activity
-//                }
-//            }
-//            healthStore.execute(query)
-//        }
+    //Fetch various different workouts
     func fetchCurrentWeekWorkoutStat(){
         let workout = HKSampleType.workoutType()
         let timePredicate = HKQuery.predicateForSamples(withStart: .startOfWeek, end: Date())
@@ -128,7 +112,7 @@ class HealthManager: ObservableObject{
             var soccerCount:Int = 0
             var BasketballCount:Int = 0
             var stairsCount:Int = 0
-            var kickBoxingCount:Int = 0
+            var cyclingCount:Int = 0
             for workout in workouts {
                 if workout.workoutActivityType == .running {
                     let duration = Int(workout.duration)/60
@@ -145,19 +129,20 @@ class HealthManager: ObservableObject{
                 }else if workout.workoutActivityType == .stairs {
                     let duration = Int(workout.duration)/60
                     stairsCount += duration
-                } else if workout.workoutActivityType == .kickboxing {
+                } else if workout.workoutActivityType == .cycling {
                     let duration = Int(workout.duration)/60
-                    kickBoxingCount += duration
+                    cyclingCount += duration
                 }
                     
                 
             }
+            //Defining what goes into each activity cards
             let runningActivity = Activity(id: 2, title: "Running", subtitle: "Mins ran this week", image: "figure.walk", tintColor: .green, amount: "\(runningCount) minutes")
-            let strengthActivity = Activity(id: 3, title: "Weight Lifting", subtitle: "This week", image: "figure.dumbbell", tintColor: .red, amount: "\(StrengthCount) minutes")
+            let strengthActivity = Activity(id: 3, title: "Weight Lifting", subtitle: "This week", image: "dumbbell", tintColor: .red, amount: "\(StrengthCount) minutes")
             let soccerActivity = Activity(id: 4, title: "Soccer", subtitle: "This week", image: "soccerball.inverse", tintColor: .blue, amount: "\(soccerCount) minutes")
-            let basketballActivity = Activity(id: 5, title: "Basketball", subtitle: "This week", image: "basketball", tintColor: .yellow, amount: "\(BasketballCount) minutes")
+            let basketballActivity = Activity(id: 5, title: "Basketball", subtitle: "This week", image: "basketball", tintColor: .blue, amount: "\(BasketballCount) minutes")
             let stairActivity = Activity(id: 6, title: "Stairs", subtitle: "This week", image: "figure.stairs", tintColor: .yellow, amount: "\(stairsCount) minutes")
-            let kickBoxingActivity = Activity(id: 7, title: "Kick Boxing", subtitle: "This week", image: "figure.kickboxing", tintColor: .green, amount: "\(kickBoxingCount) minutes")
+            let cyclingActivity = Activity(id: 7, title: "Cycling", subtitle: "This week", image: "figure.outdoor.cycle", tintColor: .green, amount: "\(cyclingCount) minutes")
             
             
             DispatchQueue.main.async{
@@ -166,7 +151,7 @@ class HealthManager: ObservableObject{
                 self.activities["weekSoccer"] = soccerActivity
                 self.activities["weekBasketball"] = basketballActivity
                 self.activities["weekStairs"] = stairActivity
-                self.activities["weekKickBoxing"] = kickBoxingActivity
+                self.activities["weekCycling"] = cyclingActivity
             }
         }
         healthStore.execute(query)

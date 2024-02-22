@@ -33,6 +33,7 @@ struct ActivityView: View{
         }
         .frame(maxWidth: .infinity,maxHeight: .infinity,alignment: .top)
         }
+    //Welcome cycle message
     func startWelcomeTimer(){
         Timer.scheduledTimer(withTimeInterval: 3, repeats: true){
             _ in withAnimation{

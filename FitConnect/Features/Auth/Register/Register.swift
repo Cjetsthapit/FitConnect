@@ -66,7 +66,7 @@ struct Register: View {
                 .ignoresSafeArea()
          
                 VStack {
-                    Image("Logo") // Replace "your_logo" with the name of your logo image asset
+                    Image("Logo")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 100, height: 100)
@@ -91,7 +91,7 @@ struct Register: View {
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 8)
                                             .stroke(isFullNameValid ? Color.clear : Color.red, lineWidth: 2)
-                                            .padding(.horizontal, 20)// Border color changes based on the error state
+                                            .padding(.horizontal, 20)
                                     )
                                     .onChange(of: fullname, perform: { newValue in
                                         isFullNameValid = isValidFullName(newValue)
@@ -101,7 +101,7 @@ struct Register: View {
                                 if !isFullNameValid {
                                     Text("Must be greater than 3 characters")
                                         .foregroundColor(.red)
-                                        .font(.caption) // Smaller font size
+                                        .font(.caption)
                                     
                                 }
                                 
@@ -114,7 +114,7 @@ struct Register: View {
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 8)
                                             .stroke(isEmailValid ? Color.clear : Color.red, lineWidth: 2)
-                                            .padding(.horizontal, 20)// Border color changes based on the error state
+                                            .padding(.horizontal, 20)
                                     )
                                     .onChange(of: email, perform: { newValue in
                                         isEmailValid = isValidEmail(newValue)
@@ -123,7 +123,7 @@ struct Register: View {
                                 if !isEmailValid {
                                     Text("Invalid email format")
                                         .foregroundColor(.red)
-                                        .font(.caption) // Smaller font size
+                                        .font(.caption)
                                     
                                 }
                                 
@@ -137,7 +137,7 @@ struct Register: View {
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 8)
                                             .stroke(isContactValid ? Color.clear : Color.red, lineWidth: 2)
-                                            .padding(.horizontal, 20)// Border color changes based on the error state
+                                            .padding(.horizontal, 20)
                                     )
                                     .onChange(of: contactNumber, perform:{ newValue in
                                         isContactValid = isValidContact(newValue)
@@ -146,7 +146,7 @@ struct Register: View {
                                 if !isContactValid {
                                     Text("Invalid phone number")
                                         .foregroundColor(.red)
-                                        .font(.caption) // Smaller font size
+                                        .font(.caption)
                                     
                                 }
                                 
@@ -159,7 +159,7 @@ struct Register: View {
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 8)
                                             .stroke((isPasswordValid) ? Color.clear : Color.red, lineWidth: 2)
-                                            .padding(.horizontal, 20)// Border color changes based on the error state
+                                            .padding(.horizontal, 20)
                                     )
                                     .onChange(of: password, perform: { newValue in
                                         isPasswordValid = isValidPassword(newValue)
@@ -168,7 +168,7 @@ struct Register: View {
                                 if !isPasswordValid {
                                     Text("must be greater than 6 characters")
                                         .foregroundColor(.red)
-                                        .font(.caption) // Smaller font size
+                                        .font(.caption)
                                     
                                 }
                                 
@@ -181,7 +181,7 @@ struct Register: View {
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 8)
                                             .stroke(( isConfirmPasswordValid) ? Color.clear : Color.red, lineWidth: 2)
-                                            .padding(.horizontal, 20)// Border color changes based on the error state
+                                            .padding(.horizontal, 20)
                                     )
                                     .onChange(of: confirmPassword, perform: { newValue in
                                         isConfirmPasswordValid = isValidConfirmPassword(newValue)
@@ -190,7 +190,7 @@ struct Register: View {
                                 if !isConfirmPasswordValid {
                                     Text("Does not match with password")
                                         .foregroundColor(.red)
-                                        .font(.caption) // Smaller font size
+                                        .font(.caption) 
                                     
                                 }
                                 if(backendError.count > 0){
@@ -265,14 +265,3 @@ struct Register: View {
         
     }
 }
-
-
-
-
-
-
-//struct Register_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Register()
-//    }
-//}

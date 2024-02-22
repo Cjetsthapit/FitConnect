@@ -21,6 +21,7 @@ struct ActivityCard: View{
     
     var body: some View {
         
+        //Actual activity card
         ZStack{
             Color(uiColor: .systemGray6)
                 .cornerRadius(15)

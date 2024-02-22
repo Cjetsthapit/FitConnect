@@ -17,7 +17,6 @@ struct Login: View {
     @State private var isLoginButtonDisabled: Bool = true
     @State var path = NavigationPath()
     @State var message = ""
-//    @ObservedObject var user:  UserState
     @EnvironmentObject var fitConnect:  FitConnectData
     
     let toggleView: () -> Void
@@ -32,7 +31,7 @@ struct Login: View {
              
             VStack {
                 
-                Image("Logo") // Replace "your_logo" with the name of your logo image asset
+                Image("Logo")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
@@ -59,7 +58,7 @@ struct Login: View {
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 8)
                                         .stroke((isEmailValid) ? Color.clear : Color.red, lineWidth: 2)
-                                        .padding(.horizontal, 20)// Border color changes based on the error state
+                                        .padding(.horizontal, 20)
                                 )
                                 .onChange(of: email,initial:false) { value,newValue in
                                     isEmailValid = isValidEmail(newValue)
@@ -68,7 +67,7 @@ struct Login: View {
                             if !isEmailValid {
                                 Text("Invalid email format")
                                     .foregroundColor(.red)
-                                    .font(.caption) // Smaller font size
+                                    .font(.caption)
                                 
                             }
                             
@@ -80,7 +79,7 @@ struct Login: View {
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 8)
                                         .stroke((isPasswordValid) ? Color.clear : Color.red, lineWidth: 2)
-                                        .padding(.horizontal, 20)// Border color changes based on the error state
+                                        .padding(.horizontal, 20)
                                 )
                                 .onChange(of: password, initial:false) {value, newValue in
                                     isPasswordValid = isValidPassword(newValue)
@@ -90,7 +89,7 @@ struct Login: View {
                             if !isPasswordValid {
                                 Text("must be greater than 6 characters")
                                     .foregroundColor(.red)
-                                    .font(.caption) // Smaller font size
+                                    .font(.caption)
                                 
                             }
                             if(message.count > 0){
@@ -151,7 +150,6 @@ struct Login: View {
             if let error = error {
                 message = error.localizedDescription
                 print("Login error:", error.localizedDescription)
-                    // Handle login errors here
                 return
             }
                 // User successfully logged in
@@ -159,7 +157,7 @@ struct Login: View {
                 message = "Successfully Logged in"
                 fitConnect.userId = authUser.uid
    
-                    // You can redirect or perform any other actions here after successful login
+                    
             }
         }
     }
@@ -175,12 +173,6 @@ struct Login: View {
         // Function to validate password strength
     func isValidPassword(_ password: String) -> Bool {
             // Basic password length validation
-        return password.count >= 6 // You can add more complex validation rules as needed
+        return password.count >= 6
     }
 }
-
-//struct Login_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Login()
-//    }
-//}

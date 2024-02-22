@@ -26,14 +26,14 @@ class OpenAiService{
         
         var urlRequest = URLRequest(url: url)
         
-            //Method
+        //Method
         urlRequest.httpMethod = httpMethod.rawValue
         
-            //Header
+        //Header
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.addValue("Bearer \(Secrets.apiKey)", forHTTPHeaderField:"Authorization" )
         
-            //Body
+        //Body
         let systemMessage = GPTMessage(role: "system", content: "You are a macronutrient expert.")
         let userMessage = GPTMessage(role: "user", content: message)
         
@@ -80,7 +80,6 @@ class OpenAiService{
         print(result.choices[0])
         print(macro)
         return macro
-//                    print(String(data: data, encoding:.utf8)!)
     }
     
     
