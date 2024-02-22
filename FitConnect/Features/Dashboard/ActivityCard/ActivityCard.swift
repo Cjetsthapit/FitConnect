@@ -12,6 +12,7 @@ struct Activity{
     let title: String
     let subtitle: String
     let image: String
+    let tintColor: Color
     let amount: String
     
 }
@@ -37,11 +38,14 @@ struct ActivityCard: View{
                     Spacer()
                     
                     Image(systemName: activity.image)
-                        .foregroundColor(.green)
+                        .minimumScaleFactor(0.6)
+                        .foregroundColor(activity.tintColor)
+                        .padding()
                 }
                 
                 Text(activity.amount)
                     .font(.system(size: 24))
+                    .bold()
             }
             .padding()
         }
@@ -51,7 +55,7 @@ struct ActivityCard: View{
 }
 struct ActivityCard_Previews: PreviewProvider{
     static var previews: some View{
-        ActivityCard(activity: Activity(id:0,title: "Daily Steps", subtitle: "Goal: 1000", image: "figure.walk", amount: "1293"))
+        ActivityCard(activity: Activity(id:0,title: "Daily Steps", subtitle: "Goal: 1000", image: "figure.walk", tintColor: .green, amount: "1293"))
        
     }
 }
