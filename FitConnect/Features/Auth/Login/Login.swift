@@ -156,7 +156,7 @@ struct Login: View {
             if let authUser = authResult?.user {
                 message = "Successfully Logged in"
                 fitConnect.userId = authUser.uid
-   
+                fitConnect.fetchFitConnectData()
                     
             }
         }

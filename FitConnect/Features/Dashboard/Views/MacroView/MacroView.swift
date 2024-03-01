@@ -79,9 +79,6 @@ struct MacroView: View {
         .sheet(isPresented: $showingForm) {
             AddMacro(foodName: self.$foodName, date: self.$date, showingForm: self.$showingForm)
         }
-        .onAppear(){
-            print("Total carb: ",fitConnect.totalCarb)
-        }
     }
 }
 

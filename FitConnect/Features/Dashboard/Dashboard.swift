@@ -12,10 +12,12 @@ struct Dashboard: View {
 
     
     var body: some View {
-       
-        AppTabView()
-        
-
+        if(fitConnect.fitConnectData?.height == 0 ){
+            UserValues()
+        }else{
+            AppTabView()
+        }
+          
     }
 }
 

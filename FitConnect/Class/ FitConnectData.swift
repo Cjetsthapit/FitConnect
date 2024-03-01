@@ -52,9 +52,18 @@ class  FitConnectData: ObservableObject{
     
     private func calculateTotalNutrients() {
         guard let fitConnect = fitConnectData else { return }
-        totalProtein = fitConnect.food.reduce(0) { $0 + $1.protein }
-        totalCarb = fitConnect.food.reduce(0) { $0 + $1.carb }
-        totalFat = fitConnect.food.reduce(0) { $0 + $1.fat }
+        
+        if let food = fitConnect.food {
+            totalProtein = food.reduce(0) { $0 + $1.protein }
+            totalCarb = food.reduce(0) { $0 + $1.carb }
+            totalFat = food.reduce(0) { $0 + $1.fat }
+        } else {
+                // Handle case where food array is nil or empty
+            print("Food data is nil or empty")
+            totalProtein = 0
+            totalCarb = 0
+            totalFat = 0
+        }
     }
 
 }
@@ -63,7 +72,12 @@ struct FitConnectResponse: Decodable{
     let fullName: String
     let contactNumber: String
     let email: String
-    let food: [Macro]
+    let height: Double
+    let weight: Double
+    let gender: String
+    let dob: Date?
+    let food: [Macro]?
+//    let settings: FitConnectSettings
 }
 
 struct Macro: Decodable, Hashable{
@@ -72,5 +86,11 @@ struct Macro: Decodable, Hashable{
     let protein: Double
     let carb: Double
     let fat: Double
+}
+
+struct FitConnectSettings: Decodable{
+    let carbLimit: Int
+    let fatLimit: Int
+    let proteinLimit: Int
 }
 

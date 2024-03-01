@@ -255,7 +255,9 @@ struct Register: View {
                 "email": email,
                 "fullName": fullname,
                 "contactNumber": contactNumber,
-                
+                "height": 0,
+                "weight": 0,
+                "gender": "not-specified",
             ])
             
             print("Firestore data addition successful")
