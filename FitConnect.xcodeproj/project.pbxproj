@@ -26,6 +26,7 @@
 		5A20FB702B8414C20086E00D /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A20FB6F2B8414C20086E00D /* CircularProgressBar.swift */; };
 		5A20FB722B8419DA0086E00D /*  FitConnectData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A20FB712B8419DA0086E00D /*  FitConnectData.swift */; };
 		5A3C618D2B76935C0051DB9C /* UserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3C618C2B76935C0051DB9C /* UserState.swift */; };
+		5A7967692B96D40C0081C881 /* MacroLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7967682B96D40C0081C881 /* MacroLimit.swift */; };
 		5A8ECB202B7DC72600D43B74 /* MacroRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8ECB1F2B7DC72600D43B74 /* MacroRequestModel.swift */; };
 		5A8ECB222B7DC73700D43B74 /* MacroResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8ECB212B7DC73700D43B74 /* MacroResponseModel.swift */; };
 		5A8ECB252B7DC7B300D43B74 /* MacroOpenAIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8ECB242B7DC7B300D43B74 /* MacroOpenAIService.swift */; };
@@ -81,6 +82,7 @@
 		5A20FB6F2B8414C20086E00D /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 		5A20FB712B8419DA0086E00D /*  FitConnectData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " FitConnectData.swift"; sourceTree = "<group>"; };
 		5A3C618C2B76935C0051DB9C /* UserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserState.swift; sourceTree = "<group>"; };
+		5A7967682B96D40C0081C881 /* MacroLimit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroLimit.swift; sourceTree = "<group>"; };
 		5A8ECB1F2B7DC72600D43B74 /* MacroRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroRequestModel.swift; sourceTree = "<group>"; };
 		5A8ECB212B7DC73700D43B74 /* MacroResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroResponseModel.swift; sourceTree = "<group>"; };
 		5A8ECB242B7DC7B300D43B74 /* MacroOpenAIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroOpenAIService.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 			children = (
 				5A8ECB2A2B7DD6E600D43B74 /* MacroView.swift */,
 				5A20FB6D2B83F8FA0086E00D /* AddMacro.swift */,
+				5A7967682B96D40C0081C881 /* MacroLimit.swift */,
 			);
 			path = MacroView;
 			sourceTree = "<group>";
@@ -473,6 +476,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A7967692B96D40C0081C881 /* MacroLimit.swift in Sources */,
 				5A8ECB272B7DC7DC00D43B74 /* Secrets.swift in Sources */,
 				5A3C618D2B76935C0051DB9C /* UserState.swift in Sources */,
 				5A8ECB292B7DD36000D43B74 /* Formatter.swift in Sources */,

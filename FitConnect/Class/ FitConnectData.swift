@@ -77,7 +77,14 @@ struct FitConnectResponse: Decodable{
     let gender: String
     let dob: Date?
     let food: [Macro]?
+    let macroLimit: MacroLimitSettings
 //    let settings: FitConnectSettings
+}
+
+struct MacroLimitSettings: Decodable{
+    let protein: Int
+    let fat: Int
+    let carb: Int
 }
 
 struct Macro: Decodable, Hashable{
@@ -88,9 +95,5 @@ struct Macro: Decodable, Hashable{
     let fat: Double
 }
 
-struct FitConnectSettings: Decodable{
-    let carbLimit: Int
-    let fatLimit: Int
-    let proteinLimit: Int
-}
+
 

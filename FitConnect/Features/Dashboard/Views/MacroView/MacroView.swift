@@ -11,69 +11,76 @@ struct MacroView: View {
     @EnvironmentObject var fitConnect: FitConnectData
     
     var body: some View {
-        NavigationView {
-            VStack {
-                Text("Today's intake")
-                HStack {
-                    CircularProgressBar(progress: self.$fitConnect.totalCarb, title: "Carbs")
-                        .padding()
-                    
-                    CircularProgressBar(progress: self.$fitConnect.totalProtein, title: "Protein")
-                        .padding()
-                    
-                    CircularProgressBar(progress: self.$fitConnect.totalFat, title: "Fats")
-                        .padding()
-                }
-                List {
-                    ForEach(fitConnect.fitConnectData?.food ?? [], id: \.self) { macro in
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("\(macro.food.capitalized)")
-                                .font(.headline)
-                            
-                            HStack(spacing: 16) {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    HStack {
-                                        Image(systemName: "flame")
-                                        Text("Fat:")
-                                    }
-                                    HStack {
-                                        Image(systemName: "leaf")
-                                        Text("Protein:")
-                                    }
-                                    HStack {
-                                        Image(systemName: "tennis.racket.circle")
-                                        Text("Carb:")
-                                    }
-                                }
+        if(fitConnect.fitConnectData?.macroLimit.carb == -1){
+            MacroLimit()
+        }
+        else {
+            NavigationView {
+                VStack {
+                    Text("Today's intake")
+                    HStack {
+                        CircularProgressBar(progress: self.$fitConnect.totalCarb, title: "Carbs", total: (fitConnect.fitConnectData?.macroLimit.carb)!)
+                            .padding()
+                        
+                        CircularProgressBar(progress: self.$fitConnect.totalProtein, title: "Protein",
+                                            total: (fitConnect.fitConnectData?.macroLimit.protein)!)
+                            .padding()
+                        
+                        CircularProgressBar(progress: self.$fitConnect.totalFat, title: "Fats",
+                                            total: (fitConnect.fitConnectData?.macroLimit.fat)!)
+                            .padding()
+                    }
+                    List {
+                        ForEach(fitConnect.fitConnectData?.food ?? [], id: \.self) { macro in
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("\(macro.food.capitalized)")
+                                    .font(.headline)
                                 
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text("\(macro.fat.formattedString()) gm")
-                                        .font(.subheadline)
-                                    Text("\(macro.protein.formattedString()) gm")
-                                        .font(.subheadline)
-                                    Text("\(macro.carb.formattedString()) gm")
-                                        .font(.subheadline)
+                                HStack(spacing: 16) {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        HStack {
+                                            Image(systemName: "flame")
+                                            Text("Fat:")
+                                        }
+                                        HStack {
+                                            Image(systemName: "leaf")
+                                            Text("Protein:")
+                                        }
+                                        HStack {
+                                            Image(systemName: "tennis.racket.circle")
+                                            Text("Carb:")
+                                        }
+                                    }
+                                    
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text("\(macro.fat.formattedString()) gm")
+                                            .font(.subheadline)
+                                        Text("\(macro.protein.formattedString()) gm")
+                                            .font(.subheadline)
+                                        Text("\(macro.carb.formattedString()) gm")
+                                            .font(.subheadline)
+                                    }
                                 }
                             }
                         }
                     }
+                    .padding()
                 }
-                .padding()
-            }
-            .toolbar {
-                ToolbarItem {
-                    Button(action: {
-                        showingForm.toggle()
-                    }) {
-                        Text("Add Data")
+                .toolbar {
+                    ToolbarItem {
+                        Button(action: {
+                            showingForm.toggle()
+                        }) {
+                            Text("Add Data")
+                        }
                     }
                 }
-            }
-            .sheet(isPresented: $showingForm) {
-                AddMacro(foodName: self.$foodName, date: self.$date, showingForm: self.$showingForm)
-            }
-            .onAppear() {
-                print("Total carb: ", fitConnect.totalCarb)
+                .sheet(isPresented: $showingForm) {
+                    AddMacro(foodName: self.$foodName, date: self.$date, showingForm: self.$showingForm)
+                }
+                .onAppear() {
+                    print("Total carb: ", fitConnect.totalCarb)
+                }
             }
         }
     }

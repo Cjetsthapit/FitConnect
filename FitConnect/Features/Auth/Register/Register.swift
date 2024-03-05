@@ -258,6 +258,11 @@ struct Register: View {
                 "height": 0,
                 "weight": 0,
                 "gender": "not-specified",
+                "macroLimit": [
+                    "protein": -1,
+                    "fat": -1,
+                    "carb": -1
+                ]
             ])
             
             print("Firestore data addition successful")

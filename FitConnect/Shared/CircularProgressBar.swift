@@ -10,7 +10,9 @@ import SwiftUI
 struct CircularProgressBar: View {
     @Binding var progress: Double
      var title: String
+    var total: Int
     var color: Color = .green
+    
     var body: some View {
         VStack{
             Text(title)
@@ -21,7 +23,7 @@ struct CircularProgressBar: View {
                     .foregroundColor(Color.gray)
                 
                 Circle()
-                    .trim(from: 0.0, to: CGFloat(min(self.progress/100, 1.0)))
+                    .trim(from: 0.0, to: CGFloat(min(self.progress/Double(total), 1.0)))
                     .stroke(style: StrokeStyle(lineWidth: 8.0, lineCap: .round, lineJoin: .round))
                     .foregroundColor(color)
                     .rotationEffect(Angle(degrees: 270))
@@ -33,6 +35,3 @@ struct CircularProgressBar: View {
     }
 }
 
-#Preview {
-    CircularProgressBar(progress: .constant(0.50),title:"Demo")
-}
