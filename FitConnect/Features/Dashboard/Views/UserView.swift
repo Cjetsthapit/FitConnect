@@ -21,8 +21,9 @@ struct UserView: View {
             }
             .padding()
             .sheet(isPresented: $isShowingSheet) {
-                UpdateWeightSheet(newWeightString: $newWeightString, updateWeight: updateWeight, isShowingSheet: $isShowingSheet)
-            }
+                            UpdateWeightSheet(newWeightString: $newWeightString, updateWeight: updateWeight, isShowingSheet: $isShowingSheet)
+                                .modifier(CustomSheetModifier(size: CGSize(width: 300, height: 200)))
+                        }
 
             Button("Logout") {
                 signOut()
@@ -85,25 +86,18 @@ struct UpdateWeightSheet: View {
             .padding()
         }
         .padding()
-        .frame(width: 300, height: 150) // Adjust the size of the sheet
-        .onAppear {
-            // Add validation to not allow 0 or negative values
-            let validWeight = Double(newWeightString) ?? 0
-            if validWeight <= 0 {
-                newWeightString = ""
-            }
-        }
-        .onChange(of: newWeightString) { newValue in
-            // Ensure that entered value during editing is not 0 or negative
-            let validWeight = Double(newValue) ?? 0
-            if validWeight <= 0 {
-                newWeightString = ""
-            }
-        }
+        .modifier(CustomSheetModifier(size: CGSize(width: 300, height: 200)))
     }
 }
 
+struct CustomSheetModifier: ViewModifier {
+    let size: CGSize
 
+    func body(content: Content) -> some View {
+        content
+            .frame(width: size.width, height: size.height)
+    }
+}
 
 struct UserView_Previews: PreviewProvider {
     static var previews: some View {
