@@ -85,9 +85,25 @@ struct UpdateWeightSheet: View {
             .padding()
         }
         .padding()
-        .frame(width: 300, height: 200) // Adjust the size of the sheet
+        .frame(width: 300, height: 150) // Adjust the size of the sheet
+        .onAppear {
+            // Add validation to not allow 0 or negative values
+            let validWeight = Double(newWeightString) ?? 0
+            if validWeight <= 0 {
+                newWeightString = ""
+            }
+        }
+        .onChange(of: newWeightString) { newValue in
+            // Ensure that entered value during editing is not 0 or negative
+            let validWeight = Double(newValue) ?? 0
+            if validWeight <= 0 {
+                newWeightString = ""
+            }
+        }
     }
 }
+
+
 
 struct UserView_Previews: PreviewProvider {
     static var previews: some View {
