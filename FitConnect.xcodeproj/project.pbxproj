@@ -37,6 +37,11 @@
 		5AAD40BC2B9196EA005D13B5 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5AAD40BB2B9196EA005D13B5 /* .gitignore */; };
 		5AB378B12B6ECD1F0019B1D7 /* FCTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB378B02B6ECD1E0019B1D7 /* FCTextField.swift */; };
 		5AB378B42B6F3BAB0019B1D7 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB378B32B6F3BAB0019B1D7 /* Dashboard.swift */; };
+		7DB011AC2B994E3E00235245 /* IndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB011AB2B994E3E00235245 /* IndexView.swift */; };
+		7DB011AE2B994E6B00235245 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB011AD2B994E6B00235245 /* DetailView.swift */; };
+		7DB011B02B994E8400235245 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB011AF2B994E8400235245 /* CardView.swift */; };
+		7DB011B22B994E9A00235245 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB011B12B994E9A00235245 /* Data.swift */; };
+		7DB011B52B99516D00235245 /* YTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB011B42B99516D00235245 /* YTView.swift */; };
 		7DED4B5D2B7DADAD0017935F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DED4B5C2B7DADAD0017935F /* HomeView.swift */; };
 		7DED4B5F2B7DAE340017935F /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DED4B5E2B7DAE340017935F /* UserView.swift */; };
 		7DED4B612B7DAE410017935F /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DED4B602B7DAE410017935F /* ActivityView.swift */; };
@@ -93,6 +98,12 @@
 		5AAD40BB2B9196EA005D13B5 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5AB378B02B6ECD1E0019B1D7 /* FCTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCTextField.swift; sourceTree = "<group>"; };
 		5AB378B32B6F3BAB0019B1D7 /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
+		7DB011AB2B994E3E00235245 /* IndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexView.swift; sourceTree = "<group>"; };
+		7DB011AD2B994E6B00235245 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		7DB011AF2B994E8400235245 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		7DB011B12B994E9A00235245 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		7DB011B32B994EFA00235245 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7DB011B42B99516D00235245 /* YTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTView.swift; sourceTree = "<group>"; };
 		7DED4B5C2B7DADAD0017935F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		7DED4B5E2B7DAE340017935F /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		7DED4B602B7DAE410017935F /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
@@ -155,6 +166,7 @@
 		5A136D912B6C821E001DD7DF /* FitConnect */ = {
 			isa = PBXGroup;
 			children = (
+				7DB011B32B994EFA00235245 /* Info.plist */,
 				5A8ECB232B7DC76E00D43B74 /* Services */,
 				7DED4B6A2B7DB7C50017935F /* FitConnect.entitlements */,
 				5A3C618B2B76934A0051DB9C /* Class */,
@@ -299,6 +311,18 @@
 			path = Dashboard;
 			sourceTree = "<group>";
 		};
+		7DB011A22B994D8000235245 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				7DB011AB2B994E3E00235245 /* IndexView.swift */,
+				7DB011AD2B994E6B00235245 /* DetailView.swift */,
+				7DB011AF2B994E8400235245 /* CardView.swift */,
+				7DB011B12B994E9A00235245 /* Data.swift */,
+				7DB011B42B99516D00235245 /* YTView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		7DED4B562B7DAC820017935F /* TabView */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,6 +334,7 @@
 		7DED4B5B2B7DADA40017935F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7DB011A22B994D8000235245 /* Home */,
 				5A20FB6C2B83F8020086E00D /* MacroView */,
 				7DED4B5C2B7DADAD0017935F /* HomeView.swift */,
 				7DED4B5E2B7DAE340017935F /* UserView.swift */,
@@ -477,6 +502,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A7967692B96D40C0081C881 /* MacroLimit.swift in Sources */,
+				7DB011B52B99516D00235245 /* YTView.swift in Sources */,
 				5A8ECB272B7DC7DC00D43B74 /* Secrets.swift in Sources */,
 				5A3C618D2B76935C0051DB9C /* UserState.swift in Sources */,
 				5A8ECB292B7DD36000D43B74 /* Formatter.swift in Sources */,
@@ -485,11 +511,15 @@
 				7DED4B632B7DAEB10017935F /* AppTabView.swift in Sources */,
 				7DED4B692B7DB6790017935F /* HealthManager.swift in Sources */,
 				5A136E072B6D4578001DD7DF /* Color+Hex.swift in Sources */,
+				7DB011B02B994E8400235245 /* CardView.swift in Sources */,
 				5A20FB722B8419DA0086E00D /*  FitConnectData.swift in Sources */,
 				5A8ECB252B7DC7B300D43B74 /* MacroOpenAIService.swift in Sources */,
 				5AB378B42B6F3BAB0019B1D7 /* Dashboard.swift in Sources */,
+				7DB011B22B994E9A00235245 /* Data.swift in Sources */,
+				7DB011AC2B994E3E00235245 /* IndexView.swift in Sources */,
 				5A20FB6E2B83F8FA0086E00D /* AddMacro.swift in Sources */,
 				7DED4B5D2B7DADAD0017935F /* HomeView.swift in Sources */,
+				7DB011AE2B994E6B00235245 /* DetailView.swift in Sources */,
 				5AB378B12B6ECD1F0019B1D7 /* FCTextField.swift in Sources */,
 				5A20FB702B8414C20086E00D /* CircularProgressBar.swift in Sources */,
 				7DED4B5F2B7DAE340017935F /* UserView.swift in Sources */,
@@ -668,6 +698,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"FitConnect/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FitConnect/Info.plist;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to enjoy all the features of our application";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -697,6 +728,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"FitConnect/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FitConnect/Info.plist;
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please allow access to enjoy all the features of our application";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

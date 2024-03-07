@@ -10,7 +10,22 @@ import SwiftUI
 
 struct HomeView: View{
     var body: some View {
-        Text("Home")
+        VStack {
+            Text("Welcome to FitConnect")
+                .font(.title)
+                .fontWeight(.bold)
+                .padding()
+            
+            Text("Your personalized fitness journey starts here.")
+                .foregroundColor(.gray)
+                .multilineTextAlignment(.center)
+                .padding()
+            
+            IndexView()
+            
+            Spacer()
+        }
+        .navigationBarTitle("FitConnect", displayMode: .inline)
     }
 }
 
