@@ -9,6 +9,8 @@ struct MacroView: View {
     @State var proteinValue: Double = 0.0
     @State var fatValue: Double = 0.0
     @EnvironmentObject var fitConnect: FitConnectData
+    @State private var selectedDate = Date()
+    @State private var dateString: String = ""
     
     var body: some View {
         if(fitConnect.fitConnectData?.macroLimit.carb == -1){
@@ -17,7 +19,24 @@ struct MacroView: View {
         else {
             NavigationView {
                 VStack {
-                    Text("Today's intake")
+                    Text("Intake fors")
+                   
+            
+                    HStack {
+                        Spacer() // Add Spacer before DatePicker
+                        
+                        DatePicker("", selection: $selectedDate, displayedComponents: .date)
+                            .datePickerStyle(DefaultDatePickerStyle())
+                            .onChange(of: selectedDate) { newValue in
+                                    // Perform filtering when the selected date changes
+                                fitConnect.selectedMacroDate = newValue
+                                fitConnect.filterMacroIntakes()
+                            }
+                        
+                        Spacer() // Add Spacer after DatePicker
+                    }
+                           
+                    
                     HStack {
                         CircularProgressBar(progress: self.$fitConnect.totalCarb, title: "Carbs", total: (fitConnect.fitConnectData?.macroLimit.carb)!)
                             .padding()
@@ -31,7 +50,7 @@ struct MacroView: View {
                             .padding()
                     }
                     List {
-                        ForEach(fitConnect.fitConnectData?.food ?? [], id: \.self) { macro in
+                        ForEach(fitConnect.filteredIntakes , id: \.self) { macro in
                             VStack(alignment: .leading, spacing: 8) {
                                 Text("\(macro.food.capitalized)")
                                     .font(.headline)
@@ -84,6 +103,12 @@ struct MacroView: View {
             }
         }
     }
+    private var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter
+    }
+  
 }
 
 struct MacroView_Previews: PreviewProvider {

@@ -32,6 +32,7 @@ struct AddMacro: View {
                                 let resp = try await OpenAiService.shared.sendPromptToChatGPT( message: foodName)
                                 try await addMacro(macro: resp, date: date)
                                 fitConnect.fetchFitConnectData()
+                                fitConnect.filterMacroIntakes()
                                 showingForm = false
                             }catch{
                                 print(error.localizedDescription)
@@ -63,7 +64,6 @@ struct AddMacro: View {
                 try await Firestore.firestore().collection("users").document(uid).updateData([
                     "food": FieldValue.arrayUnion([macroDict]),
                 ])
-                
                 print("Firestore data addition successful")
             } catch {
                 throw error
