@@ -10,21 +10,31 @@ struct UserView: View {
 
     var body: some View {
         VStack {
-            // User Information Section
+            Button(action: {
+                isShowingProfile.toggle() // Toggle profile popup visibility
+            }) {
+                Text("User Information")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding(.bottom)
+            }
+
+            // Update Weight Section
             Form {
-                Section(header: Text("User Information")) {
+                Section(header: Text("User Profile")) {
                     Button(action: {
-                        isShowingProfile.toggle() // Toggle profile popup visibility
+                        isShowingProfile.toggle()
                     }) {
                         HStack {
-                            Text("User Information")
-                            Spacer()
-                            Image(systemName: "person.fill")
+                            Image(systemName: "person.circle.fill")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(.blue)
+                            Text("View Profile")
                         }
                     }
                 }
 
-                // Update Weight Section
                 Section(header: Text("Update Weight")) {
                     Button(action: {
                         isShowingSheet.toggle()
@@ -52,7 +62,7 @@ struct UserView: View {
                     .modifier(CustomSheetModifier(size: CGSize(width: 300, height: 200)))
             }
             .popover(isPresented: $isShowingProfile) {
-                UserProfileView() // Show user profile popup
+                UserProfileView()
             }
             Spacer()
         }
@@ -97,18 +107,43 @@ struct UserProfileView: View {
     @EnvironmentObject var fitConnect: FitConnectData
 
     var body: some View {
-        // Customize user profile popup content as needed
         VStack {
-            Text("User Profile Information")
+            Text("User Profile")
                 .font(.title)
                 .fontWeight(.bold)
-                .padding()
-            Text("Name: \(fitConnect.fitConnectData?.fullName ?? "Unknown")")
-            Text("Email: \(fitConnect.fitConnectData?.email ?? "Unknown")")
-            // Add more user profile information here as needed
+                .padding(.bottom, 20)
+            
+            // Display user information
+            VStack(alignment: .leading, spacing: 10) {
+                            Text("Name: \(fitConnect.fitConnectData?.fullName ?? "Unknown")")
+                            Text("Email: \(fitConnect.fitConnectData?.email ?? "Unknown")")
+                            Text("Contact Number: \(fitConnect.fitConnectData?.contactNumber ?? "Unknown")")
+                            Text("Height: \(fitConnect.fitConnectData?.height ?? 0) inches")
+                            Text("Weight: \(fitConnect.fitConnectData?.weight ?? 0) lbs")
+                            Text("Gender: \(fitConnect.fitConnectData?.gender ?? "Unknown")")
+                            if let dob = fitConnect.fitConnectData?.dob {
+                                Text("Date of Birth: \(dob, formatter: dateFormatter)")
+                            } else {
+                                Text("Date of Birth: Unknown")
+                            }
+                            // Add more user profile information here as needed
+                        }
+            .padding()
+            .foregroundColor(.black)
+            .background(Color.white)
+            .cornerRadius(10)
+            .shadow(radius: 5)
+            
             Spacer()
         }
+        .padding()
+        .frame(width: 300, height: 200)
     }
+    private let dateFormatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .medium
+            return formatter
+        }()
 }
 
 struct UpdateWeightSheet: View {
