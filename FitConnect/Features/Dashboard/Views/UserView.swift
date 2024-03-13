@@ -10,14 +10,12 @@ struct UserView: View {
 
     var body: some View {
         VStack {
-            Button(action: {
-                isShowingProfile.toggle() // Toggle profile popup visibility
-            }) {
+            
                 Text("User Information")
                     .font(.title)
                     .fontWeight(.bold)
                     .padding(.bottom)
-            }
+            
 
             // Update Weight Section
             Form {
