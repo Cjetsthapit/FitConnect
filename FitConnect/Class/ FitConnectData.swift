@@ -53,6 +53,7 @@ class  FitConnectData: ObservableObject{
         } else {
                 // Handle case where food array is nil or empty
             print("Food data is nil or empty")
+            filteredIntakes = []
             totalProtein = 0
             totalCarb = 0
             totalFat = 0

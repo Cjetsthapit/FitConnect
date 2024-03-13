@@ -3,6 +3,8 @@ import Foundation
 import Firebase
 
 struct MacroLimit: View {
+    @Binding var isShowingMacroUpdate: Bool
+    
     @State private var protein: String = ""
     @State private var fat: String = ""
     @State private var carb: String = ""
@@ -97,6 +99,7 @@ struct MacroLimit: View {
                     print("Error updating document: \(error)")
                 } else {
                     fitConnect.fetchFitConnectData()
+                    isShowingMacroUpdate = false
                     print("Document successfully updated")
                 }
             }

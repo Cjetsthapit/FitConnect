@@ -11,10 +11,11 @@ struct MacroView: View {
     @EnvironmentObject var fitConnect: FitConnectData
     @State private var selectedDate = Date()
     @State private var dateString: String = ""
+    @State private var isShowingMacroUpdate = false
     
     var body: some View {
         if(fitConnect.fitConnectData?.macroLimit.carb == -1){
-            MacroLimit()
+            MacroLimit(isShowingMacroUpdate: $isShowingMacroUpdate)
         }
         else {
             NavigationView {

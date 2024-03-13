@@ -5,7 +5,9 @@ import FirebaseFirestore
 struct UserView: View {
     @EnvironmentObject var fitConnect: FitConnectData
     @State private var newWeightString = ""
+    
     @State private var isShowingSheet = false
+    @State private var isShowingMacroUpdate = false
     @State private var isShowingProfile = false // New state for showing profile popup
 
     var body: some View {
@@ -32,10 +34,10 @@ struct UserView: View {
                         }
                     }
                 }
-
-                Section(header: Text("Update Weight")) {
+                
+                Section(header: Text("Macro Settings")) {
                     Button(action: {
-                        isShowingSheet.toggle()
+                        isShowingMacroUpdate.toggle()
                     }) {
                         HStack {
                             Text("Enter New Weight")
@@ -44,6 +46,7 @@ struct UserView: View {
                         }
                     }
                 }
+
 
                 Section(header: Text("Logout")) {
                     Button(action: {
@@ -58,6 +61,9 @@ struct UserView: View {
             .sheet(isPresented: $isShowingSheet) {
                 UpdateWeightSheet(newWeightString: $newWeightString, updateWeight: updateWeight, isShowingSheet: $isShowingSheet)
                     .modifier(CustomSheetModifier(size: CGSize(width: 300, height: 200)))
+            }
+            .sheet(isPresented: $isShowingMacroUpdate) {
+                MacroLimit(isShowingMacroUpdate: $isShowingMacroUpdate)
             }
             .popover(isPresented: $isShowingProfile) {
                 UserProfileView()
@@ -116,8 +122,8 @@ struct UserProfileView: View {
                             Text("Name: \(fitConnect.fitConnectData?.fullName ?? "Unknown")")
                             Text("Email: \(fitConnect.fitConnectData?.email ?? "Unknown")")
                             Text("Contact Number: \(fitConnect.fitConnectData?.contactNumber ?? "Unknown")")
-                            Text("Height: \(fitConnect.fitConnectData?.height ?? 0) inches")
-                            Text("Weight: \(fitConnect.fitConnectData?.weight ?? 0) lbs")
+                Text("Height: \(fitConnect.fitConnectData?.height.formattedString() ?? "0") cm")
+                Text("Weight: \(fitConnect.fitConnectData?.weight.formattedString() ?? "0") kg")
                             Text("Gender: \(fitConnect.fitConnectData?.gender ?? "Unknown")")
                             if let dob = fitConnect.fitConnectData?.dob {
                                 Text("Date of Birth: \(dob, formatter: dateFormatter)")
