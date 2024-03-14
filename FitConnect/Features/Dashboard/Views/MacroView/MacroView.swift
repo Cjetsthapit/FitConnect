@@ -20,21 +20,18 @@ struct MacroView: View {
         else {
             NavigationView {
                 VStack {
-                    Text("Intake fors")
+                    Text("Intake for")
                    
             
                     HStack {
-                        Spacer() // Add Spacer before DatePicker
-                        
+                        Spacer()
                         DatePicker("", selection: $selectedDate, displayedComponents: .date)
                             .datePickerStyle(DefaultDatePickerStyle())
-                            .onChange(of: selectedDate) { newValue in
-                                    // Perform filtering when the selected date changes
+                            .onChange(of: selectedDate) {oldValue, newValue in
                                 fitConnect.selectedMacroDate = newValue
                                 fitConnect.filterMacroIntakes()
                             }
-                        
-                        Spacer() // Add Spacer after DatePicker
+                        Spacer()
                     }
                            
                     
