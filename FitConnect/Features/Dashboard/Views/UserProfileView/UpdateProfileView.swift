@@ -1,5 +1,5 @@
 //
-//  UserProfileView.swift
+//  UpdateProfileView.swift
 //  FitConnect
 //
 //  Created by Nibha Maharjan on 2024-03-13.
@@ -10,42 +10,51 @@ import FirebaseFirestore
 struct UpdateProfileView: View {
     @EnvironmentObject var fitConnect: FitConnectData
     @State private var newName = ""
-    @State private var newEmail = ""
     @State private var newContactNumber = ""
     @State private var newHeightString = ""
     @State private var newWeightString = ""
-    @State private var selectedGenderIndex = 0
     @Binding var isShowingUpdateProfile: Bool
     
     @State private var validationMessage = ""
-
-    var genders = ["Male", "Female", "Other"]
 
     var body: some View {
         NavigationView {
             VStack {
                 Form {
                     Section(header: Text("Personal Information")) {
-                        TextField("Name", text: $newName)
-                            .textContentType(.name)
-                        TextField("Email", text: $newEmail)
-                            .textContentType(.emailAddress)
-                        TextField("Contact Number", text: $newContactNumber)
-                            .keyboardType(.phonePad)
+                        VStack(alignment: .leading) {
+                            Text("Name")
+                                .font(.headline)
+                                .padding(.bottom, 5)
+                            TextField("Name", text: $newName)
+                                .textContentType(.name)
+                        }
+                        
+                        VStack(alignment: .leading) {
+                            Text("Contact Number")
+                                .font(.headline)
+                                .padding(.bottom, 5)
+                            TextField("Contact Number", text: $newContactNumber)
+                                .keyboardType(.phonePad)
+                        }
                     }
                     
                     Section(header: Text("Physical Information")) {
-                        TextField("Height (cm)", text: $newHeightString)
-                            .keyboardType(.decimalPad)
-                        TextField("Weight (kg)", text: $newWeightString)
-                            .keyboardType(.decimalPad)
-                        
-                        Picker(selection: $selectedGenderIndex, label: Text("Gender")) {
-                            ForEach(0..<genders.count) {
-                                Text(self.genders[$0])
-                            }
+                        VStack(alignment: .leading) {
+                            Text("Height (cm)")
+                                .font(.headline)
+                                .padding(.bottom, 5)
+                            TextField("Height (cm)", text: $newHeightString)
+                                .keyboardType(.decimalPad)
                         }
-                        .pickerStyle(MenuPickerStyle())
+                        
+                        VStack(alignment: .leading) {
+                            Text("Weight (kg)")
+                                .font(.headline)
+                                .padding(.bottom, 5)
+                            TextField("Weight (kg)", text: $newWeightString)
+                                .keyboardType(.decimalPad)
+                        }
                     }
                 }
                 
@@ -72,14 +81,9 @@ struct UpdateProfileView: View {
     private func initializeData() {
         // Initialize the form fields with existing user data
         newName = fitConnect.fitConnectData?.fullName ?? ""
-        newEmail = fitConnect.fitConnectData?.email ?? ""
         newContactNumber = fitConnect.fitConnectData?.contactNumber ?? ""
         newHeightString = fitConnect.fitConnectData?.height.formattedString() ?? ""
         newWeightString = fitConnect.fitConnectData?.weight.formattedString() ?? ""
-        if let gender = fitConnect.fitConnectData?.gender,
-           let index = genders.firstIndex(of: gender) {
-            selectedGenderIndex = index
-        }
     }
 
     private func updateProfile() {
@@ -97,9 +101,6 @@ struct UpdateProfileView: View {
         if !newName.isEmpty {
             updatedData["fullName"] = newName
         }
-        if !newEmail.isEmpty {
-            updatedData["email"] = newEmail
-        }
         if !newContactNumber.isEmpty {
             updatedData["contactNumber"] = newContactNumber
         }
@@ -109,7 +110,6 @@ struct UpdateProfileView: View {
         if let newWeight = Double(newWeightString) {
             updatedData["weight"] = newWeight
         }
-        updatedData["gender"] = genders[selectedGenderIndex]
 
         let db = Firestore.firestore()
         let userRef = db.collection("users").document(userId)
@@ -129,13 +129,8 @@ struct UpdateProfileView: View {
         // Perform validation on input fields
         var isValid = true
         
-        if newName.isEmpty || newEmail.isEmpty || newContactNumber.isEmpty || newHeightString.isEmpty || newWeightString.isEmpty {
+        if newName.isEmpty || newContactNumber.isEmpty || newHeightString.isEmpty || newWeightString.isEmpty {
             validationMessage = "Please fill in all fields."
-            isValid = false
-        }
-        // Validate email format
-        else if !isValidEmail(email: newEmail) {
-            validationMessage = "Please enter a valid email address."
             isValid = false
         }
         else {
@@ -143,12 +138,6 @@ struct UpdateProfileView: View {
         }
         
         return isValid
-    }
-    
-    private func isValidEmail(email: String) -> Bool {
-        // Simple email validation regex
-        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
     }
 }
 
