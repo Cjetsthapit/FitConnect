@@ -1,5 +1,5 @@
 //
-//  TabView.swift
+//  ActivityView.swift
 //  FitConnect
 //
 //  Created by Nibha Maharjan on 2024-02-14.

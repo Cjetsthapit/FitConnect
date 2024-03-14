@@ -1,3 +1,9 @@
+//
+//  UserView.swift
+//  FitConnect
+//
+//  Created by Nibha Maharjan on 2024-02-14.
+//
 import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
@@ -5,70 +11,64 @@ import FirebaseFirestore
 struct UserView: View {
     @EnvironmentObject var fitConnect: FitConnectData
     @State private var newWeightString = ""
-    
     @State private var isShowingSheet = false
     @State private var isShowingMacroUpdate = false
-    @State private var isShowingProfile = false // New state for showing profile popup
+    @State private var isShowingProfile = false // New state for showing profile screen
 
     var body: some View {
-        VStack {
-            
+        NavigationView {
+            VStack {
                 Text("User Information")
                     .font(.title)
                     .fontWeight(.bold)
                     .padding(.bottom)
-            
-
-            // Update Weight Section
-            Form {
-                Section(header: Text("User Profile")) {
-                    Button(action: {
-                        isShowingProfile.toggle()
-                    }) {
-                        HStack {
-                            Image(systemName: "person.circle.fill")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(.blue)
-                            Text("View Profile")
-                        }
-                    }
-                }
                 
-                Section(header: Text("Macro Settings")) {
-                    Button(action: {
-                        isShowingMacroUpdate.toggle()
-                    }) {
-                        HStack {
-                            Text("Enter New Weight")
-                            Spacer()
-                            Image(systemName: "arrow.right.circle.fill")
+                Form {
+                    Section(header: Text("User Profile")) {
+                        NavigationLink(destination: UserProfileView()) {
+                            HStack {
+                                Image(systemName: "person.circle.fill")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(.blue)
+                                Text("View Profile")
+                            }
+                        }
+                    }
+                    
+                    Section(header: Text("Macro Settings")) {
+                        Button(action: {
+                            isShowingMacroUpdate.toggle()
+                        }) {
+                            HStack {
+                                Text("Enter New Macro Limit")
+                                Spacer()
+                                Image(systemName: "arrow.right.circle.fill")
+                            }
+                        }
+                    }
+
+                    Section(header: Text("Logout")) {
+                        Button(action: {
+                            signOut()
+                        }) {
+                            Text("Logout")
+                                .foregroundColor(.red)
                         }
                     }
                 }
-
-
-                Section(header: Text("Logout")) {
-                    Button(action: {
-                        signOut()
-                    }) {
-                        Text("Logout")
-                            .foregroundColor(.red)
-                    }
+                .padding()
+                .sheet(isPresented: $isShowingSheet) {
+                    UpdateWeightSheet(newWeightString: $newWeightString, updateWeight: updateWeight, isShowingSheet: $isShowingSheet)
+                        .modifier(CustomSheetModifier(size: CGSize(width: 300, height: 200)))
                 }
+                .sheet(isPresented: $isShowingMacroUpdate) {
+                    MacroLimit(isShowingMacroUpdate: $isShowingMacroUpdate)
+                }
+                Spacer()
             }
-            .padding()
-            .sheet(isPresented: $isShowingSheet) {
-                UpdateWeightSheet(newWeightString: $newWeightString, updateWeight: updateWeight, isShowingSheet: $isShowingSheet)
-                    .modifier(CustomSheetModifier(size: CGSize(width: 300, height: 200)))
-            }
-            .sheet(isPresented: $isShowingMacroUpdate) {
-                MacroLimit(isShowingMacroUpdate: $isShowingMacroUpdate)
-            }
-            .popover(isPresented: $isShowingProfile) {
-                UserProfileView()
-            }
-            Spacer()
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
         }
     }
 
@@ -106,49 +106,6 @@ struct UserView: View {
     }
 }
 
-// User profile popup view
-struct UserProfileView: View {
-    @EnvironmentObject var fitConnect: FitConnectData
-
-    var body: some View {
-        VStack {
-            Text("User Profile")
-                .font(.title)
-                .fontWeight(.bold)
-                .padding(.bottom, 20)
-            
-            // Display user information
-            VStack(alignment: .leading, spacing: 10) {
-                            Text("Name: \(fitConnect.fitConnectData?.fullName ?? "Unknown")")
-                            Text("Email: \(fitConnect.fitConnectData?.email ?? "Unknown")")
-                            Text("Contact Number: \(fitConnect.fitConnectData?.contactNumber ?? "Unknown")")
-                Text("Height: \(fitConnect.fitConnectData?.height.formattedString() ?? "0") cm")
-                Text("Weight: \(fitConnect.fitConnectData?.weight.formattedString() ?? "0") kg")
-                            Text("Gender: \(fitConnect.fitConnectData?.gender ?? "Unknown")")
-                            if let dob = fitConnect.fitConnectData?.dob {
-                                Text("Date of Birth: \(dob, formatter: dateFormatter)")
-                            } else {
-                                Text("Date of Birth: Unknown")
-                            }
-                            // Add more user profile information here as needed
-                        }
-            .padding()
-            .foregroundColor(.black)
-            .background(Color.white)
-            .cornerRadius(10)
-            .shadow(radius: 5)
-            
-            Spacer()
-        }
-        .padding()
-        .frame(width: 300, height: 200)
-    }
-    private let dateFormatter: DateFormatter = {
-            let formatter = DateFormatter()
-            formatter.dateStyle = .medium
-            return formatter
-        }()
-}
 
 struct UpdateWeightSheet: View {
     @Binding var newWeightString: String

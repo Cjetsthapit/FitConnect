@@ -1,3 +1,9 @@
+//
+//  UserView.swift
+//  FitConnect
+//
+//  Created by Nibha Maharjan on 2024-02-14.
+//
 import SwiftUI
 import FirebaseAuth
 import Firebase

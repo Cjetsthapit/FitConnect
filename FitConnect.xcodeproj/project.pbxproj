@@ -37,6 +37,8 @@
 		5AAD40BC2B9196EA005D13B5 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5AAD40BB2B9196EA005D13B5 /* .gitignore */; };
 		5AB378B12B6ECD1F0019B1D7 /* FCTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB378B02B6ECD1E0019B1D7 /* FCTextField.swift */; };
 		5AB378B42B6F3BAB0019B1D7 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB378B32B6F3BAB0019B1D7 /* Dashboard.swift */; };
+		7D48BCC62BA28365009A0CE8 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D48BCC52BA28365009A0CE8 /* UserProfileView.swift */; };
+		7D48BCC82BA2853D009A0CE8 /* UpdateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D48BCC72BA2853D009A0CE8 /* UpdateProfileView.swift */; };
 		7DB011AC2B994E3E00235245 /* IndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB011AB2B994E3E00235245 /* IndexView.swift */; };
 		7DB011AE2B994E6B00235245 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB011AD2B994E6B00235245 /* DetailView.swift */; };
 		7DB011B02B994E8400235245 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB011AF2B994E8400235245 /* CardView.swift */; };
@@ -98,6 +100,8 @@
 		5AAD40BB2B9196EA005D13B5 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5AB378B02B6ECD1E0019B1D7 /* FCTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCTextField.swift; sourceTree = "<group>"; };
 		5AB378B32B6F3BAB0019B1D7 /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
+		7D48BCC52BA28365009A0CE8 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		7D48BCC72BA2853D009A0CE8 /* UpdateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileView.swift; sourceTree = "<group>"; };
 		7DB011AB2B994E3E00235245 /* IndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexView.swift; sourceTree = "<group>"; };
 		7DB011AD2B994E6B00235245 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		7DB011AF2B994E8400235245 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -311,6 +315,15 @@
 			path = Dashboard;
 			sourceTree = "<group>";
 		};
+		7D48BCC42BA28357009A0CE8 /* UserProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				7D48BCC52BA28365009A0CE8 /* UserProfileView.swift */,
+				7D48BCC72BA2853D009A0CE8 /* UpdateProfileView.swift */,
+			);
+			path = UserProfileView;
+			sourceTree = "<group>";
+		};
 		7DB011A22B994D8000235245 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -334,6 +347,7 @@
 		7DED4B5B2B7DADA40017935F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7D48BCC42BA28357009A0CE8 /* UserProfileView */,
 				7DB011A22B994D8000235245 /* Home */,
 				5A20FB6C2B83F8020086E00D /* MacroView */,
 				7DED4B5C2B7DADAD0017935F /* HomeView.swift */,
@@ -524,10 +538,12 @@
 				5A20FB702B8414C20086E00D /* CircularProgressBar.swift in Sources */,
 				7DED4B5F2B7DAE340017935F /* UserView.swift in Sources */,
 				5A8ECB2B2B7DD6E600D43B74 /* MacroView.swift in Sources */,
+				7D48BCC82BA2853D009A0CE8 /* UpdateProfileView.swift in Sources */,
 				5A136DCC2B6C9DAD001DD7DF /* Login.swift in Sources */,
 				5A136DCE2B6D25CF001DD7DF /* Register.swift in Sources */,
 				5A136D952B6C821E001DD7DF /* ContentView.swift in Sources */,
 				7DED4B662B7DAFC90017935F /* ActivityCard.swift in Sources */,
+				7D48BCC62BA28365009A0CE8 /* UserProfileView.swift in Sources */,
 				5AAD40B82B912575005D13B5 /* UserValues.swift in Sources */,
 				5A8ECB202B7DC72600D43B74 /* MacroRequestModel.swift in Sources */,
 				5A8ECB222B7DC73700D43B74 /* MacroResponseModel.swift in Sources */,
