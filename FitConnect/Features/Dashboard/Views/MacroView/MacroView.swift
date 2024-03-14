@@ -47,41 +47,57 @@ struct MacroView: View {
                                             total: (fitConnect.fitConnectData?.macroLimit.fat)!)
                             .padding()
                     }
-                    List {
-                        ForEach(fitConnect.filteredIntakes , id: \.self) { macro in
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("\(macro.food.capitalized)")
-                                    .font(.headline)
-                                
-                                HStack(spacing: 16) {
-                                    VStack(alignment: .leading, spacing: 4) {
-                                        HStack {
-                                            Image(systemName: "flame")
-                                            Text("Fat:")
-                                        }
-                                        HStack {
-                                            Image(systemName: "leaf")
-                                            Text("Protein:")
-                                        }
-                                        HStack {
-                                            Image(systemName: "tennis.racket.circle")
-                                            Text("Carb:")
-                                        }
-                                    }
+                    if fitConnect.filteredIntakes.isEmpty {
+                        VStack {
+                            Image(systemName: "exclamationmark.circle") // Choose an appropriate icon
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 60, height: 60)
+                                .foregroundColor(.gray)
+                            Text("No data available")
+                                .font(.title)
+                                .foregroundColor(.gray)
+                            Spacer()
+                        }
+                        .padding()
+                    } else
+                    {
+                        List {
+                            ForEach(fitConnect.filteredIntakes , id: \.self) { macro in
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text("\(macro.food.capitalized)")
+                                        .font(.headline)
                                     
-                                    VStack(alignment: .leading, spacing: 4) {
-                                        Text("\(macro.fat.formattedString()) gm")
-                                            .font(.subheadline)
-                                        Text("\(macro.protein.formattedString()) gm")
-                                            .font(.subheadline)
-                                        Text("\(macro.carb.formattedString()) gm")
-                                            .font(.subheadline)
+                                    HStack(spacing: 16) {
+                                        VStack(alignment: .leading, spacing: 4) {
+                                            HStack {
+                                                Image(systemName: "flame")
+                                                Text("Fat:")
+                                            }
+                                            HStack {
+                                                Image(systemName: "leaf")
+                                                Text("Protein:")
+                                            }
+                                            HStack {
+                                                Image(systemName: "tennis.racket.circle")
+                                                Text("Carb:")
+                                            }
+                                        }
+                                        
+                                        VStack(alignment: .leading, spacing: 4) {
+                                            Text("\(macro.fat.formattedString()) gm")
+                                                .font(.subheadline)
+                                            Text("\(macro.protein.formattedString()) gm")
+                                                .font(.subheadline)
+                                            Text("\(macro.carb.formattedString()) gm")
+                                                .font(.subheadline)
+                                        }
                                     }
                                 }
                             }
                         }
+                        .padding()
                     }
-                    .padding()
                 }
                 .toolbar {
                     ToolbarItem {
