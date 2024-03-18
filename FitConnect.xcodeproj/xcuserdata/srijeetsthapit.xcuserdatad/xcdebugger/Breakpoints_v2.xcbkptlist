@@ -68,53 +68,5 @@
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1CF13F3D-187D-48E2-8A72-1229BCC26263"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FitConnect/Features/Dashboard/Views/MacroView/MacroView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "body"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "1CF13F3D-187D-48E2-8A72-1229BCC26263 - 52f9d13d67811a49"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FitConnect.MacroView.body.getter : some"
-                  moduleName = "FitConnect"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/srijeetsthapit/CentennialSem2/Capstone/FitConnect/FitConnect/Features/Dashboard/Views/MacroView/MacroView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "1624">
-               </Location>
-               <Location
-                  uuid = "1CF13F3D-187D-48E2-8A72-1229BCC26263 - bd25d433be75f750"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0 in FitConnect.MacroView.body.getter : some"
-                  moduleName = "FitConnect"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/srijeetsthapit/CentennialSem2/Capstone/FitConnect/FitConnect/Features/Dashboard/Views/MacroView/MacroView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "472">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

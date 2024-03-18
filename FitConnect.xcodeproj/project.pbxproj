@@ -37,6 +37,10 @@
 		5AAD40BC2B9196EA005D13B5 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5AAD40BB2B9196EA005D13B5 /* .gitignore */; };
 		5AB378B12B6ECD1F0019B1D7 /* FCTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB378B02B6ECD1E0019B1D7 /* FCTextField.swift */; };
 		5AB378B42B6F3BAB0019B1D7 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB378B32B6F3BAB0019B1D7 /* Dashboard.swift */; };
+		5AB712DD2BA617E5000E4E89 /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB712DC2BA617E5000E4E89 /* DailyView.swift */; };
+		5AB712DF2BA618E6000E4E89 /* WeeklyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB712DE2BA618E6000E4E89 /* WeeklyView.swift */; };
+		5AB712E12BA61923000E4E89 /* MonthlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB712E02BA61923000E4E89 /* MonthlyView.swift */; };
+		5AB712E42BA639B5000E4E89 /* ChartViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB712E32BA639B5000E4E89 /* ChartViewWrapper.swift */; };
 		7D48BCC62BA28365009A0CE8 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D48BCC52BA28365009A0CE8 /* UserProfileView.swift */; };
 		7D48BCC82BA2853D009A0CE8 /* UpdateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D48BCC72BA2853D009A0CE8 /* UpdateProfileView.swift */; };
 		7DB011AC2B994E3E00235245 /* IndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB011AB2B994E3E00235245 /* IndexView.swift */; };
@@ -100,6 +104,10 @@
 		5AAD40BB2B9196EA005D13B5 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5AB378B02B6ECD1E0019B1D7 /* FCTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCTextField.swift; sourceTree = "<group>"; };
 		5AB378B32B6F3BAB0019B1D7 /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
+		5AB712DC2BA617E5000E4E89 /* DailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyView.swift; sourceTree = "<group>"; };
+		5AB712DE2BA618E6000E4E89 /* WeeklyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyView.swift; sourceTree = "<group>"; };
+		5AB712E02BA61923000E4E89 /* MonthlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyView.swift; sourceTree = "<group>"; };
+		5AB712E32BA639B5000E4E89 /* ChartViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewWrapper.swift; sourceTree = "<group>"; };
 		7D48BCC52BA28365009A0CE8 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		7D48BCC72BA2853D009A0CE8 /* UpdateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileView.swift; sourceTree = "<group>"; };
 		7DB011AB2B994E3E00235245 /* IndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexView.swift; sourceTree = "<group>"; };
@@ -270,6 +278,9 @@
 				5A8ECB2A2B7DD6E600D43B74 /* MacroView.swift */,
 				5A20FB6D2B83F8FA0086E00D /* AddMacro.swift */,
 				5A7967682B96D40C0081C881 /* MacroLimit.swift */,
+				5AB712DC2BA617E5000E4E89 /* DailyView.swift */,
+				5AB712DE2BA618E6000E4E89 /* WeeklyView.swift */,
+				5AB712E02BA61923000E4E89 /* MonthlyView.swift */,
 			);
 			path = MacroView;
 			sourceTree = "<group>";
@@ -299,6 +310,7 @@
 			children = (
 				5AB378B02B6ECD1E0019B1D7 /* FCTextField.swift */,
 				5A20FB6F2B8414C20086E00D /* CircularProgressBar.swift */,
+				5AB712E32BA639B5000E4E89 /* ChartViewWrapper.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -470,6 +482,7 @@
 			mainGroup = 5A136D862B6C821E001DD7DF;
 			packageReferences = (
 				5A136DBF2B6C856A001DD7DF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				5AB712E22BA63843000E4E89 /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = 5A136D902B6C821E001DD7DF /* Products */;
 			projectDirPath = "";
@@ -515,6 +528,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AB712DD2BA617E5000E4E89 /* DailyView.swift in Sources */,
 				5A7967692B96D40C0081C881 /* MacroLimit.swift in Sources */,
 				7DB011B52B99516D00235245 /* YTView.swift in Sources */,
 				5A8ECB272B7DC7DC00D43B74 /* Secrets.swift in Sources */,
@@ -531,6 +545,7 @@
 				5AB378B42B6F3BAB0019B1D7 /* Dashboard.swift in Sources */,
 				7DB011B22B994E9A00235245 /* Data.swift in Sources */,
 				7DB011AC2B994E3E00235245 /* IndexView.swift in Sources */,
+				5AB712DF2BA618E6000E4E89 /* WeeklyView.swift in Sources */,
 				5A20FB6E2B83F8FA0086E00D /* AddMacro.swift in Sources */,
 				7DED4B5D2B7DADAD0017935F /* HomeView.swift in Sources */,
 				7DB011AE2B994E6B00235245 /* DetailView.swift in Sources */,
@@ -543,11 +558,13 @@
 				5A136DCE2B6D25CF001DD7DF /* Register.swift in Sources */,
 				5A136D952B6C821E001DD7DF /* ContentView.swift in Sources */,
 				7DED4B662B7DAFC90017935F /* ActivityCard.swift in Sources */,
+				5AB712E12BA61923000E4E89 /* MonthlyView.swift in Sources */,
 				7D48BCC62BA28365009A0CE8 /* UserProfileView.swift in Sources */,
 				5AAD40B82B912575005D13B5 /* UserValues.swift in Sources */,
 				5A8ECB202B7DC72600D43B74 /* MacroRequestModel.swift in Sources */,
 				5A8ECB222B7DC73700D43B74 /* MacroResponseModel.swift in Sources */,
 				5A136D932B6C821E001DD7DF /* FitConnectApp.swift in Sources */,
+				5AB712E42BA639B5000E4E89 /* ChartViewWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -883,6 +900,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 10.20.0;
+			};
+		};
+		5AB712E22BA63843000E4E89 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

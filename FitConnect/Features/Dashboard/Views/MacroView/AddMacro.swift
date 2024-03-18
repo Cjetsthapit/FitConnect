@@ -1,19 +1,13 @@
-//
-//  AddMacro.swift
-//  FitConnect
-//
-//  Created by Srijeet Sthapit on 2024-02-19.
-//
 
 import SwiftUI
 import FirebaseFirestore
 import FirebaseAuth
 
 struct AddMacro: View {
-    @Binding var foodName: String
-    @Binding var date: Date
+    @State private var foodName: String = ""
+    @State private var date: Date = Date()
     @Binding var showingForm: Bool
-    @EnvironmentObject var fitConnect:  FitConnectData
+    @EnvironmentObject var fitConnect: FitConnectData
     
     var body: some View {
         NavigationView {
@@ -26,17 +20,7 @@ struct AddMacro: View {
                 }
                 Section {
                     Button("Submit") {
-                        Task{
-                            do{
-                                print("FOod is ", foodName)
-                                let resp = try await OpenAiService.shared.sendPromptToChatGPT( message: foodName)
-                                try await addMacro(macro: resp, date: date)
-                                
-                                showingForm = false
-                            }catch{
-                                print(error.localizedDescription)
-                            }
-                        }
+                        submitData()
                     }
                     .padding()
                 }
@@ -48,36 +32,44 @@ struct AddMacro: View {
         }
     }
     
-    func addMacro(macro: MacroResponse, date: Date) async throws {
-        if let currentUser = Auth.auth().currentUser {
-            let uid = currentUser.uid
-            let macroDict: [String: Any] = [
-                "food": macro.food,
-                "fat": macro.fat,
-                "carb": macro.carb,
-                "protein": macro.protein,
-                "date":date
-            ]
+    func submitData() {
+        Task {
             do {
-                
-                try await Firestore.firestore().collection("users").document(uid).updateData([
-                    "food": FieldValue.arrayUnion([macroDict]),
-                ])
-                fitConnect.fetchFitConnectData()
-                fitConnect.filterMacroIntakes()
-                print("Firestore data addition successful")
+                print("Food is ", foodName)
+                let resp = try await OpenAiService.shared.sendPromptToChatGPT(message: foodName)
+                try await addMacro(macro: resp, date: date)
+                showingForm = false
             } catch {
-                throw error
+                print(error.localizedDescription)
             }
-        } else {
-                // User not logged in
         }
- 
+    }
+    
+    func addMacro(macro: MacroResponse, date: Date) async throws {
+        guard let currentUser = Auth.auth().currentUser else {
+            print("User not logged in")
+            return // Exit if user is not logged in
+        }
         
+        let uid = currentUser.uid
+        let macroDict: [String: Any] = [
+            "food": macro.food,
+            "fat": macro.fat,
+            "carb": macro.carb,
+            "protein": macro.protein,
+            "date": Timestamp(date: date) // Use Timestamp for Firestore
+        ]
+        
+        do {
+            try await Firestore.firestore().collection("users").document(uid).updateData([
+                "food": FieldValue.arrayUnion([macroDict]),
+            ])
+            fitConnect.fetchFitConnectData()
+            fitConnect.filterMacroIntakes()
+            print("Firestore data addition successful")
+        } catch {
+            throw error
+        }
     }
 }
 
-
-//#Preview {
-//    AddMacro()
-//}

@@ -1,111 +1,140 @@
-//
-//  FitConnect.swift
-//   FitConnectData
-//
-//  Created by Srijeet Sthapit on 2024-02-19.
-//
 
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
-class  FitConnectData: ObservableObject{
-    
+class FitConnectData: ObservableObject {
     @Published var fitConnectData: FitConnectResponse?
-    @Published var userId : String?
+    @Published var userId: String?
+    
     @Published var totalProtein: Double = 0
     @Published var totalCarb: Double = 0
     @Published var totalFat: Double = 0
+    
+    @Published var totalWeeklyProtein: Double = 0
+    @Published var totalWeeklyCarb: Double = 0
+    @Published var totalWeeklyFat: Double = 0
+    @Published var weeklySummaryData: [WeeklyViewData] = []
     @Published var filteredIntakes: [Macro] = []
-    @Published var selectedMacroDate = Date(){
+    @Published var selectedMacroDate = Date() {
         didSet {
             filterMacroIntakes()
         }
     }
+    @Published var selectedMacroRange = [Date(), Date()]{
+        didSet{
+            filterWeeklyIntakes()
+        }
+    }
+    @Published var filteredWeeklyIntakes: [Macro] = []
+    
+    private lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
     
     init() {
         fetchFitConnectData()
-        filterMacroIntakes()
+    }
+    
+    func filterWeeklyIntakes() {
+        guard let food = fitConnectData?.food, selectedMacroRange.count == 2 else {
+            resetNutrients()
+            return
+        }
+         func dayLabelFromWeekday(_ weekday: Int) -> String {
+            let dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+                // Calendar's weekday starts from 1 (Sunday) to 7 (Saturday)
+            return dayNames[weekday - 1]
+        }
+        let startOfWeek = selectedMacroRange[0]
+        let endOfWeek = selectedMacroRange[1]
+        let calendar = Calendar.current
+        
+            // Filter food data within the selected week range
+        let weeklyFilteredIntakes = food.filter { $0.date >= startOfWeek && $0.date <= endOfWeek }
+        
+            // Reset previous data
+        weeklySummaryData.removeAll()
+        
+            // Aggregate data by day and type
+        for dayOffset in 0...6 {
+            guard let dayDate = calendar.date(byAdding: .day, value: dayOffset, to: startOfWeek) else { continue }
+            let day = dateFormatter.string(from: dayDate)
+            let dayOfWeek = calendar.component(.weekday, from: dayDate)
+            let dayLabel = dayLabelFromWeekday(dayOfWeek)
+            
+            let dailyIntakes = weeklyFilteredIntakes.filter { dateFormatter.string(from: $0.date) == day }
+            
+                // Aggregate by type
+            let types = ["Carbs", "Protein", "Fat"]
+            for type in types {
+                let totalHours = dailyIntakes.reduce(0) { (result, macro) -> Double in
+                    switch type {
+                        case "Fat":
+                            return result + (Double(macro.fat)*8) // Assuming you convert fat to an 'hours'-like metric
+                        case "Protein":
+                            return result + (Double(macro.protein)*4)
+                        case "Carbs":
+                            return result + (Double(macro.carb)*4)
+                        default:
+                            return result
+                    }
+                }
+                let data = WeeklyViewData(day: dayLabel, hours: totalHours, type: type)
+                weeklySummaryData.append(data)
+            }
+        }
     }
     
     func filterMacroIntakes() {
-        print("here")
-        guard let fitConnect = fitConnectData else { return }
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        
-        if let food = fitConnect.food {
-                // Filter macro intakes based on selectedMacroDate
-            let selectedDateString = dateFormatter.string(from: selectedMacroDate)
-            
-                // Filter macro intakes based on the date strings with only year, month, and day components
-            filteredIntakes = food.filter { foodDate in
-                let foodDateString = dateFormatter.string(from: foodDate.date)
-                print(foodDateString, selectedDateString)
-                return foodDateString == selectedDateString
-            }
-            print(filteredIntakes)
-                // Update total nutrients based on filtered intakes
-            totalProtein = filteredIntakes.reduce(0) { $0 + $1.protein }
-            totalCarb = filteredIntakes.reduce(0) { $0 + $1.carb }
-            totalFat = filteredIntakes.reduce(0) { $0 + $1.fat }
-        } else {
-                // Handle case where food array is nil or empty
-            print("Food data is nil or empty")
-            filteredIntakes = []
-            totalProtein = 0
-            totalCarb = 0
-            totalFat = 0
+        guard let food = fitConnectData?.food else {
+            resetNutrients()
+            return
         }
+        
+        let selectedDateString = dateFormatter.string(from: selectedMacroDate)
+        
+        filteredIntakes = food.filter { dateFormatter.string(from: $0.date) == selectedDateString }
+        
+        updateTotalNutrients()
     }
     
     func fetchFitConnectData() {
-        if let currentUser = Auth.auth().currentUser {
-            self.userId = currentUser.uid
-            let db = Firestore.firestore()
-            let userRef = db.collection("users").document(currentUser.uid)
-            print("userRef", userRef)
-            userRef.getDocument { document, error in
-                if let error = error {
-                    print("Error fetching users data:", error.localizedDescription)
-                    return
-                }
-                
-                guard let document = document, document.exists else {
-                    print("User document not found")
-                    return
-                }
-                
-                do {
-                    self.fitConnectData = try document.data(as: FitConnectResponse.self)
-                    self.filterMacroIntakes()
-//                    self.calculateTotalNutrients()
-                    print("FitConnect data fetched:", self.fitConnectData ?? "nil")
-                    
-                } catch {
-                    print("Error decoding user data:", error.localizedDescription)
-                }
+        guard let currentUser = Auth.auth().currentUser else { return }
+        self.userId = currentUser.uid
+        
+        Firestore.firestore().collection("users").document(currentUser.uid).getDocument { [weak self] document, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                print("Error fetching user data:", error.localizedDescription)
+                return
             }
+            
+            guard let document = document, document.exists, let fitConnectData = try? document.data(as: FitConnectResponse.self) else {
+                print("User document not found or data is invalid")
+                return
+            }
+            
+            self.fitConnectData = fitConnectData
+            self.filterMacroIntakes()
         }
     }
     
-    private func calculateTotalNutrients() {
-        guard let fitConnect = fitConnectData else { return }
-        
-        if let food = fitConnect.food {
-            totalProtein = food.reduce(0) { $0 + $1.protein }
-            totalCarb = food.reduce(0) { $0 + $1.carb }
-            totalFat = food.reduce(0) { $0 + $1.fat }
-        } else {
-                // Handle case where food array is nil or empty
-            print("Food data is nil or empty")
-            totalProtein = 0
-            totalCarb = 0
-            totalFat = 0
-        }
+    private func updateTotalNutrients() {
+        totalProtein = filteredIntakes.reduce(0) { $0 + $1.protein }
+        totalCarb = filteredIntakes.reduce(0) { $0 + $1.carb }
+        totalFat = filteredIntakes.reduce(0) { $0 + $1.fat }
     }
-
+    
+    private func resetNutrients() {
+        filteredIntakes = []
+        totalProtein = 0
+        totalCarb = 0
+        totalFat = 0
+    }
 }
 
 struct FitConnectResponse: Decodable{
@@ -118,7 +147,7 @@ struct FitConnectResponse: Decodable{
     let dob: Date?
     let food: [Macro]?
     let macroLimit: MacroLimitSettings
-//    let settings: FitConnectSettings
+        //    let settings: FitConnectSettings
 }
 
 struct MacroLimitSettings: Decodable{
@@ -135,5 +164,9 @@ struct Macro: Decodable, Hashable{
     let fat: Double
 }
 
-
-
+struct WeeklyViewData: Identifiable {
+    var id = UUID().uuidString
+    var day: String
+    var hours: Double
+    var type: String
+}
