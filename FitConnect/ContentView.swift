@@ -21,7 +21,7 @@ struct ContentView: View {
                 if fitConnect.userId == nil {
 
                         if !showRegisterView {
-                            Login( toggleView: {showRegisterView.toggle()})
+                            LoginView( toggleView: {showRegisterView.toggle()})
                           
                         } else {
                             Register(toggleView: {showRegisterView.toggle()})

@@ -32,59 +32,74 @@ struct WeeklyView: View {
             updateWeekRange(for: selectedDate)
         }
         Chart {
-            
-            ForEach (fitConnect.weeklySummaryData) { d in
-                
-                BarMark(x: .value("Day", d.day),
-                        y: .value("Calories", d.hours))
-                .annotation (position: .overlay) {
+            ForEach(fitConnect.weeklySummaryData) { dataEntry in
+                BarMark(
+                    x: .value("Day", dataEntry.day),
+                    y: .value("Calories", dataEntry.hours)
+                )
+                .annotation(position: .top) {
+                    Text("\(dataEntry.hours, specifier: "%.1f")")
+                        .font(.caption)
+                        .foregroundColor(.white)
                 }
-                .foregroundStyle(by: .value("Type", d.type))
+                .foregroundStyle(by: .value("Type", dataEntry.type))
             }
-            
         }
-        
-        .chartYScale(range: .plotDimension(padding: 60))
+        .chartYAxis {
+            AxisMarks(preset: .extended, position: .leading)
+        }
+        .chartLegend(.visible)
+        .chartForegroundStyleScale([
+            "Carbs": .blue,
+            "Protein": .green,
+            "Fat": .orange
+        ])
         .padding()
-        
-//        List {
-//                // Group by day
-//            ForEach(groupDataByDay(), id: \.key) { day, entries in
-//                Section(header: Text(day)) {
-//                        // For each type within a day, display the total
-//                    ForEach(entries, id: \.id) { entry in
-//                        HStack {
-//                            Text(entry.type)
-//                            Spacer()
-//                            Text("\(entry.hours, specifier: "%.1f") hours")
-//                        }
-//                    }
-//                }
-//            }
-//        }
+    
+
         
         List {
-            ForEach(fitConnect.weeklySummaryData) { data in
-                HStack {
-                    Text(data.day)
-                    Spacer()
-                    VStack(alignment: .trailing) {
-                        Text("\(data.type):")
-                            .bold()
-                        Text(String(format: "%.1f calories", data.hours))
+            ForEach(groupedData(), id: \.id) { dailySummary in
+                Section(header: Text(dailySummary.day)) {
+                    ForEach(dailySummary.entries, id: \.id) { entry in
+                        HStack {
+                            switch entry.type {
+                                case "Carbs":
+                                    detail(iconName: "tennis.racket.circle", nutrientColor: .blue, text: "Carbs")
+                                case "Protein":
+                                    detail(iconName: "leaf.fill", nutrientColor: .green, text: "Protein")
+                                case "Fat":
+                                    detail(iconName: "flame.fill", nutrientColor: .yellow, text: "Fat")
+                                    
+                                default:
+                                    Text(entry.type).foregroundColor(.red)
+                            }
+                            
+                            Spacer()
+                            Text("\(entry.hours, specifier: "%.1f") calories")
+                        }
                     }
                 }
-                .padding(.vertical, 8)
             }
         }
+        
+  
         .navigationTitle("Weekly Summary")
        
     }
     
-//    private func groupDataByDay() -> [String: [WeeklyViewData]] {
-//        Dictionary(grouping: fitConnect.weeklySummaryData, by: { $0.day })
-//    }
-    
+
+    private func detail(iconName: String, nutrientColor: Color, text: String) -> some View {
+        HStack {
+            Image(systemName: iconName)
+                .foregroundColor(nutrientColor)
+                .accessibilityHidden(true)
+              
+            Text(text)
+                .foregroundColor(nutrientColor) 
+           
+        }
+    }
     private func updateWeekRange(for date: Date) {
         let calendar = Calendar.current
         
@@ -100,5 +115,27 @@ struct WeeklyView: View {
         
         fitConnect.selectedMacroRange = [weekStart, weekEnd]
     }
+    private func groupedData() -> [DailyNutritionalSummary] {
+        let groupedDictionary = Dictionary(grouping: fitConnect.weeklySummaryData, by: { $0.day })
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "E" // Short weekday format, e.g., "Sun", "Mon", etc.
+        
+        let calendar = Calendar.current
+        
+        return groupedDictionary.compactMap { day, entries in
+            guard let date = dateFormatter.date(from: day) else { return nil }
+            let weekdayIndex = calendar.component(.weekday, from: date)
+            return DailyNutritionalSummary(day: day, entries: entries, weekdayIndex: weekdayIndex)
+        }
+        .sorted { $0.weekdayIndex < $1.weekdayIndex }
+    }
+}
+
+struct DailyNutritionalSummary: Identifiable {
+    var id: String { day }
+    let day: String
+    let entries: [WeeklyViewData]
+    let weekdayIndex: Int // Add this property
 }
 
