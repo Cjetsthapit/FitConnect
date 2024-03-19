@@ -19,6 +19,11 @@ extension Date{
         components.weekday = 2 // Monday
         return calendar.date(from: components)!
     }
+    static var oneMonthAgo: Date {
+        let calendar = Calendar.current
+        let oneMonth = calendar.date(byAdding: .month, value: -1, to: Date())
+        return calendar.startOfDay(for: oneMonth!)
+    }
 }
 
 class HealthManager: ObservableObject{
@@ -53,6 +58,7 @@ class HealthManager: ObservableObject{
                 fetchTodaySteps()
                 fetchTodayCalories()
                 fetchCurrentWeekWorkoutStat()
+                fetchPastMonthStepData()
             }catch{
                 print ("error fetching health data")
             }
@@ -76,6 +82,7 @@ class HealthManager: ObservableObject{
             }
             completion(dailySteps)
         }
+        healthStore.execute(query)
         
     }
     
@@ -184,5 +191,11 @@ class HealthManager: ObservableObject{
 
     // MARK: Chart data
 extension HealthManager{
-  
+    func fetchPastMonthStepData(){
+        fetchDailySteps(startDate: .oneMonthAgo){dailySteps in
+            DispatchQueue.main.async {
+                self.oneMonthChartData = dailySteps
+            }
+        }
+    }
 }
