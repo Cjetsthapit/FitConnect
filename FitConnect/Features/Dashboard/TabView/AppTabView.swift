@@ -21,6 +21,10 @@ struct AppTabView: View{
                 .tag("Activity")
                 .tabItem{Image(systemName: "trophy")}
                 .environmentObject(manager)
+            ChartView()
+                .tag("Chart")
+                .tabItem{Image(systemName: "chart.xyaxis.line")}
+                .environmentObject(manager)
             MacroView()
                 .tag("Macro")
                 .tabItem{Image(systemName: "fork.knife")}

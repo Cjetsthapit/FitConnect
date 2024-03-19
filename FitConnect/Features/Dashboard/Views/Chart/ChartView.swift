@@ -6,13 +6,29 @@
 //
 
 import SwiftUI
+import Charts
+
+
+struct DailyStepView: Identifiable {
+    let id = UUID()
+    let date: Date
+    let stepCount: Double
+}
 
 struct ChartView: View {
+    @EnvironmentObject var manager: HealthManager
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            Chart{
+                ForEach(manager.oneMonthChartData) { daily in
+                    BarMark(x: .value(daily.date.formatted(), daily.date, unit: .day), y: .value("Steps", daily.stepCount))
+                }
+            }
+        }
     }
 }
 
 #Preview {
     ChartView()
+        .environmentObject(HealthManager())
 }

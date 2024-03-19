@@ -26,6 +26,8 @@ class HealthManager: ObservableObject{
     
     @Published var activities: [String: Activity] = [:]
     
+    @Published var oneMonthChartData = [DailyStepView]()
+    
     //MockActivities for testing purpose
     @Published var mockActivities: [String: Activity] = [
         "todaySteps": Activity(id: 0, title: "Todays steps", subtitle: "Goal 10,000", image: "figure.walk", tintColor: .green, amount:"10000"),
@@ -55,6 +57,26 @@ class HealthManager: ObservableObject{
                 print ("error fetching health data")
             }
         }
+    }
+    
+    func fetchDailySteps(startDate: Date, completion: @escaping ([DailyStepView]) -> Void){
+        let steps = HKQuantityType(.stepCount)
+        let interval = DateComponents(day: 1)
+        let query = HKStatisticsCollectionQuery(quantityType: steps, quantitySamplePredicate: nil, anchorDate: startDate, intervalComponents: interval)
+        
+        query.initialResultsHandler = { query, result, error in
+            guard let result = result else {
+                completion([])
+                return
+            }
+            
+            var dailySteps = [DailyStepView]()
+            result.enumerateStatistics(from: startDate, to: Date()) {statistics, stop in
+                dailySteps.append(DailyStepView(date: statistics.startDate, stepCount: statistics.sumQuantity()?.doubleValue(for: .count()) ?? 0.00))
+            }
+            completion(dailySteps)
+        }
+        
     }
     
     //Fetch steps
@@ -157,4 +179,10 @@ class HealthManager: ObservableObject{
         healthStore.execute(query)
         
     }
+}
+
+
+    // MARK: Chart data
+extension HealthManager{
+  
 }
