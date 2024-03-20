@@ -2,6 +2,7 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import Charts
 
 class FitConnectData: ObservableObject {
     @Published var fitConnectData: FitConnectResponse?
@@ -147,6 +148,7 @@ struct FitConnectResponse: Decodable{
     let dob: Date?
     let food: [Macro]?
     let macroLimit: MacroLimitSettings
+    let weights: [String: WeightEntry]?
         //    let settings: FitConnectSettings
 }
 
@@ -169,4 +171,11 @@ struct WeeklyViewData: Identifiable {
     var day: String
     var hours: Double
     var type: String
+}
+
+struct WeightEntry: Decodable {
+
+    
+    let date: String
+    let weight: Double
 }

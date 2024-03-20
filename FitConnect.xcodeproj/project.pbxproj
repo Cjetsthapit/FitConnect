@@ -41,6 +41,8 @@
 		5AB712DF2BA618E6000E4E89 /* WeeklyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB712DE2BA618E6000E4E89 /* WeeklyView.swift */; };
 		5AB712E12BA61923000E4E89 /* MonthlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB712E02BA61923000E4E89 /* MonthlyView.swift */; };
 		5AB712E42BA639B5000E4E89 /* ChartViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB712E32BA639B5000E4E89 /* ChartViewWrapper.swift */; };
+		5AFC35BE2BAA8A8700831B27 /* WeightTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFC35BD2BAA8A8700831B27 /* WeightTracker.swift */; };
+		5AFC35C02BAA8BF900831B27 /* AddWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFC35BF2BAA8BF900831B27 /* AddWeight.swift */; };
 		7D26068A2BA93576003982B4 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2606892BA93576003982B4 /* ChartView.swift */; };
 		7D48BCC62BA28365009A0CE8 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D48BCC52BA28365009A0CE8 /* UserProfileView.swift */; };
 		7D48BCC82BA2853D009A0CE8 /* UpdateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D48BCC72BA2853D009A0CE8 /* UpdateProfileView.swift */; };
@@ -109,6 +111,8 @@
 		5AB712DE2BA618E6000E4E89 /* WeeklyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyView.swift; sourceTree = "<group>"; };
 		5AB712E02BA61923000E4E89 /* MonthlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyView.swift; sourceTree = "<group>"; };
 		5AB712E32BA639B5000E4E89 /* ChartViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewWrapper.swift; sourceTree = "<group>"; };
+		5AFC35BD2BAA8A8700831B27 /* WeightTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightTracker.swift; sourceTree = "<group>"; };
+		5AFC35BF2BAA8BF900831B27 /* AddWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWeight.swift; sourceTree = "<group>"; };
 		7D2606892BA93576003982B4 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		7D48BCC52BA28365009A0CE8 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		7D48BCC72BA2853D009A0CE8 /* UpdateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileView.swift; sourceTree = "<group>"; };
@@ -283,6 +287,7 @@
 				5AB712DC2BA617E5000E4E89 /* DailyView.swift */,
 				5AB712DE2BA618E6000E4E89 /* WeeklyView.swift */,
 				5AB712E02BA61923000E4E89 /* MonthlyView.swift */,
+				5AFC35BF2BAA8BF900831B27 /* AddWeight.swift */,
 			);
 			path = MacroView;
 			sourceTree = "<group>";
@@ -377,6 +382,7 @@
 				7DED4B5E2B7DAE340017935F /* UserView.swift */,
 				7DED4B602B7DAE410017935F /* ActivityView.swift */,
 				5AAD40B72B912575005D13B5 /* UserValues.swift */,
+				5AFC35BD2BAA8A8700831B27 /* WeightTracker.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -543,6 +549,7 @@
 				5A7967692B96D40C0081C881 /* MacroLimit.swift in Sources */,
 				7DB011B52B99516D00235245 /* YTView.swift in Sources */,
 				5A8ECB272B7DC7DC00D43B74 /* Secrets.swift in Sources */,
+				5AFC35BE2BAA8A8700831B27 /* WeightTracker.swift in Sources */,
 				5A3C618D2B76935C0051DB9C /* UserState.swift in Sources */,
 				5A8ECB292B7DD36000D43B74 /* Formatter.swift in Sources */,
 				7DED4B612B7DAE410017935F /* ActivityView.swift in Sources */,
@@ -565,6 +572,7 @@
 				7DED4B5F2B7DAE340017935F /* UserView.swift in Sources */,
 				5A8ECB2B2B7DD6E600D43B74 /* MacroView.swift in Sources */,
 				7D48BCC82BA2853D009A0CE8 /* UpdateProfileView.swift in Sources */,
+				5AFC35C02BAA8BF900831B27 /* AddWeight.swift in Sources */,
 				5A136DCC2B6C9DAD001DD7DF /* Login.swift in Sources */,
 				5A136DCE2B6D25CF001DD7DF /* Register.swift in Sources */,
 				5A136D952B6C821E001DD7DF /* ContentView.swift in Sources */,

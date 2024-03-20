@@ -27,11 +27,12 @@ struct UserView: View {
                     Section(header: Text("User Profile")) {
                         NavigationLink(destination: UserProfileView()) {
                             HStack {
-                                Image(systemName: "person.circle.fill")
-                                    .resizable()
-                                    .frame(width: 20, height: 20)
-                                    .foregroundColor(.blue)
                                 Text("View Profile")
+                            }
+                        }
+                        NavigationLink(destination: WeightTracker()) {
+                            HStack {
+                                Text("Weight Tracker")
                             }
                         }
                     }
