@@ -25,6 +25,9 @@ struct AppTabView: View{
                 .tag("Chart")
                 .tabItem{Image(systemName: "chart.xyaxis.line")}
                 .environmentObject(manager)
+            ChatBotView()
+                .tag("ChatBot")
+                .tabItem{Image(systemName: "paperplane.fill")}
             MacroView()
                 .tag("Macro")
                 .tabItem{Image(systemName: "fork.knife")}

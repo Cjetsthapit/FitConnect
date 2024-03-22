@@ -43,6 +43,8 @@
 		5AB712E42BA639B5000E4E89 /* ChartViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB712E32BA639B5000E4E89 /* ChartViewWrapper.swift */; };
 		5AFC35BE2BAA8A8700831B27 /* WeightTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFC35BD2BAA8A8700831B27 /* WeightTracker.swift */; };
 		5AFC35C02BAA8BF900831B27 /* AddWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFC35BF2BAA8BF900831B27 /* AddWeight.swift */; };
+		7D113AD42BAE1AB000F9ABA2 /* ChatBotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D113AD32BAE1AB000F9ABA2 /* ChatBotView.swift */; };
+		7D113AD62BAE1BAF00F9ABA2 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 7D113AD52BAE1BAF00F9ABA2 /* OpenAI */; };
 		7D26068A2BA93576003982B4 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2606892BA93576003982B4 /* ChartView.swift */; };
 		7D48BCC62BA28365009A0CE8 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D48BCC52BA28365009A0CE8 /* UserProfileView.swift */; };
 		7D48BCC82BA2853D009A0CE8 /* UpdateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D48BCC72BA2853D009A0CE8 /* UpdateProfileView.swift */; };
@@ -113,6 +115,7 @@
 		5AB712E32BA639B5000E4E89 /* ChartViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewWrapper.swift; sourceTree = "<group>"; };
 		5AFC35BD2BAA8A8700831B27 /* WeightTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightTracker.swift; sourceTree = "<group>"; };
 		5AFC35BF2BAA8BF900831B27 /* AddWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWeight.swift; sourceTree = "<group>"; };
+		7D113AD32BAE1AB000F9ABA2 /* ChatBotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBotView.swift; sourceTree = "<group>"; };
 		7D2606892BA93576003982B4 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		7D48BCC52BA28365009A0CE8 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		7D48BCC72BA2853D009A0CE8 /* UpdateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileView.swift; sourceTree = "<group>"; };
@@ -137,6 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D113AD62BAE1BAF00F9ABA2 /* OpenAI in Frameworks */,
 				5A136DC32B6C856A001DD7DF /* FirebaseAnalyticsSwift in Frameworks */,
 				5A136DC72B6C856A001DD7DF /* FirebaseFirestore in Frameworks */,
 				5A136DC52B6C856A001DD7DF /* FirebaseAuth in Frameworks */,
@@ -383,6 +387,7 @@
 				7DED4B602B7DAE410017935F /* ActivityView.swift */,
 				5AAD40B72B912575005D13B5 /* UserValues.swift */,
 				5AFC35BD2BAA8A8700831B27 /* WeightTracker.swift */,
+				7D113AD32BAE1AB000F9ABA2 /* ChatBotView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -424,6 +429,7 @@
 				5A136DC22B6C856A001DD7DF /* FirebaseAnalyticsSwift */,
 				5A136DC42B6C856A001DD7DF /* FirebaseAuth */,
 				5A136DC62B6C856A001DD7DF /* FirebaseFirestore */,
+				7D113AD52BAE1BAF00F9ABA2 /* OpenAI */,
 			);
 			productName = FitConnect;
 			productReference = 5A136D8F2B6C821E001DD7DF /* FitConnect.app */;
@@ -500,6 +506,7 @@
 			packageReferences = (
 				5A136DBF2B6C856A001DD7DF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				5AB712E22BA63843000E4E89 /* XCRemoteSwiftPackageReference "Charts" */,
+				7D113AD22BAE1A6D00F9ABA2 /* XCRemoteSwiftPackageReference "OpenAI" */,
 			);
 			productRefGroup = 5A136D902B6C821E001DD7DF /* Products */;
 			projectDirPath = "";
@@ -584,6 +591,7 @@
 				5A8ECB202B7DC72600D43B74 /* MacroRequestModel.swift in Sources */,
 				5A8ECB222B7DC73700D43B74 /* MacroResponseModel.swift in Sources */,
 				5A136D932B6C821E001DD7DF /* FitConnectApp.swift in Sources */,
+				7D113AD42BAE1AB000F9ABA2 /* ChatBotView.swift in Sources */,
 				5AB712E42BA639B5000E4E89 /* ChartViewWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -930,6 +938,14 @@
 				minimumVersion = 5.1.0;
 			};
 		};
+		7D113AD22BAE1A6D00F9ABA2 /* XCRemoteSwiftPackageReference "OpenAI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MacPaw/OpenAI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.6;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -952,6 +968,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5A136DBF2B6C856A001DD7DF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		7D113AD52BAE1BAF00F9ABA2 /* OpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D113AD22BAE1A6D00F9ABA2 /* XCRemoteSwiftPackageReference "OpenAI" */;
+			productName = OpenAI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
