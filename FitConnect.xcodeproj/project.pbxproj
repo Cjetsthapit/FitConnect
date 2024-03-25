@@ -48,6 +48,7 @@
 		7D26068A2BA93576003982B4 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2606892BA93576003982B4 /* ChartView.swift */; };
 		7D48BCC62BA28365009A0CE8 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D48BCC52BA28365009A0CE8 /* UserProfileView.swift */; };
 		7D48BCC82BA2853D009A0CE8 /* UpdateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D48BCC72BA2853D009A0CE8 /* UpdateProfileView.swift */; };
+		7D5BE0CA2BB11DF500DB9991 /* TotalActivityPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BE0C92BB11DF500DB9991 /* TotalActivityPage.swift */; };
 		7DB011AC2B994E3E00235245 /* IndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB011AB2B994E3E00235245 /* IndexView.swift */; };
 		7DB011AE2B994E6B00235245 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB011AD2B994E6B00235245 /* DetailView.swift */; };
 		7DB011B02B994E8400235245 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB011AF2B994E8400235245 /* CardView.swift */; };
@@ -119,6 +120,7 @@
 		7D2606892BA93576003982B4 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		7D48BCC52BA28365009A0CE8 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		7D48BCC72BA2853D009A0CE8 /* UpdateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileView.swift; sourceTree = "<group>"; };
+		7D5BE0C92BB11DF500DB9991 /* TotalActivityPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalActivityPage.swift; sourceTree = "<group>"; };
 		7DB011AB2B994E3E00235245 /* IndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexView.swift; sourceTree = "<group>"; };
 		7DB011AD2B994E6B00235245 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		7DB011AF2B994E8400235245 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 				7DB011A22B994D8000235245 /* Home */,
 				5A20FB6C2B83F8020086E00D /* MacroView */,
 				7DED4B5C2B7DADAD0017935F /* HomeView.swift */,
+				7D5BE0C92BB11DF500DB9991 /* TotalActivityPage.swift */,
 				7DED4B5E2B7DAE340017935F /* UserView.swift */,
 				7DED4B602B7DAE410017935F /* ActivityView.swift */,
 				5AAD40B72B912575005D13B5 /* UserValues.swift */,
@@ -564,6 +567,7 @@
 				7DED4B632B7DAEB10017935F /* AppTabView.swift in Sources */,
 				7DED4B692B7DB6790017935F /* HealthManager.swift in Sources */,
 				5A136E072B6D4578001DD7DF /* Color+Hex.swift in Sources */,
+				7D5BE0CA2BB11DF500DB9991 /* TotalActivityPage.swift in Sources */,
 				7DB011B02B994E8400235245 /* CardView.swift in Sources */,
 				5A20FB722B8419DA0086E00D /*  FitConnectData.swift in Sources */,
 				5A8ECB252B7DC7B300D43B74 /* MacroOpenAIService.swift in Sources */,

@@ -17,14 +17,18 @@ struct AppTabView: View{
             HomeView()
                 .tag("Home")
                 .tabItem{Image(systemName: "house")}
-            ActivityView()
+            TotalActivityPage()
                 .tag("Activity")
                 .tabItem{Image(systemName: "trophy")}
                 .environmentObject(manager)
-            ChartView()
-                .tag("Chart")
-                .tabItem{Image(systemName: "chart.xyaxis.line")}
-                .environmentObject(manager)
+//            ActivityView()
+//                .tag("Activity")
+//                .tabItem{Image(systemName: "trophy")}
+//                .environmentObject(manager)
+//            ChartView()
+//                .tag("Chart")
+//                .tabItem{Image(systemName: "chart.xyaxis.line")}
+//                .environmentObject(manager)
             ChatBotView()
                 .tag("ChatBot")
                 .tabItem{Image(systemName: "paperplane.fill")}
