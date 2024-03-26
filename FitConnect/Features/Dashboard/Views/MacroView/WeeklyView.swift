@@ -115,24 +115,24 @@ struct WeeklyView: View {
         
         fitConnect.selectedMacroRange = [weekStart, weekEnd]
     }
-    private func groupedData() -> [DailyNutritionalSummary] {
+    private func groupedData() -> [WeeklySummarizedData] {
         let groupedDictionary = Dictionary(grouping: fitConnect.weeklySummaryData, by: { $0.day })
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "E" // Short weekday format, e.g., "Sun", "Mon", etc.
+        dateFormatter.dateFormat = "E" 
         
         let calendar = Calendar.current
         
         return groupedDictionary.compactMap { day, entries in
             guard let date = dateFormatter.date(from: day) else { return nil }
             let weekdayIndex = calendar.component(.weekday, from: date)
-            return DailyNutritionalSummary(day: day, entries: entries, weekdayIndex: weekdayIndex)
+            return WeeklySummarizedData(day: day, entries: entries, weekdayIndex: weekdayIndex)
         }
         .sorted { $0.weekdayIndex < $1.weekdayIndex }
     }
 }
 
-struct DailyNutritionalSummary: Identifiable {
+struct WeeklySummarizedData: Identifiable {
     var id: String { day }
     let day: String
     let entries: [WeeklyViewData]

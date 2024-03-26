@@ -27,7 +27,14 @@ class FitConnectData: ObservableObject {
             filterWeeklyIntakes()
         }
     }
+    @Published var selectedMacroYear : String = ""{
+        didSet{
+            filterMonthlyIntakes()
+        }
+    }
+    
     @Published var filteredWeeklyIntakes: [Macro] = []
+    @Published var monthlySummaryData: [MonthlyViewData] = []
     
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -39,6 +46,48 @@ class FitConnectData: ObservableObject {
         fetchFitConnectData()
     }
     
+    func filterMonthlyIntakes() {
+        guard let food = fitConnectData?.food else {
+            monthlySummaryData = []
+            return
+        }
+        
+        let calendar = Calendar.current
+        let yearInt = Int(selectedMacroYear) ?? Calendar.current.component(.year, from: Date())
+        let foodInSelectedYear = food.filter { calendar.component(.year, from: $0.date) == yearInt }
+        
+        monthlySummaryData.removeAll()
+        
+        for monthIndex in 1...12 {
+            let monthFood = foodInSelectedYear.filter {
+                calendar.component(.month, from: $0.date) == monthIndex
+            }
+            
+            let monthlyProtein = monthFood.reduce(0) { $0 + $1.protein }
+            let monthlyCarb = monthFood.reduce(0) { $0 + $1.carb }
+            let monthlyFat = monthFood.reduce(0) { $0 + $1.fat }
+            
+            let monthSymbol = calendar.monthSymbols[monthIndex - 1]
+            
+                // Appending MonthlyViewData for each nutrient type
+            ["Protein", "Carb", "Fat"].forEach { nutrient in
+                let value: Double
+                switch nutrient {
+                    case "Protein":
+                        value = monthlyProtein
+                    case "Carb":
+                        value = monthlyCarb
+                    case "Fat":
+                        value = monthlyFat
+                    default:
+                        value = 0 // This case should never be hit due to the hardcoded types
+                }
+                
+                monthlySummaryData.append(MonthlyViewData(month: monthSymbol, value: value, type: nutrient))
+            }
+        }
+    }
+
     func filterWeeklyIntakes() {
         guard let food = fitConnectData?.food, selectedMacroRange.count == 2 else {
             resetNutrients()
@@ -149,7 +198,6 @@ struct FitConnectResponse: Decodable{
     let food: [Macro]?
     let macroLimit: MacroLimitSettings
     let weights: [String: WeightEntry]?
-        //    let settings: FitConnectSettings
 }
 
 struct MacroLimitSettings: Decodable{
@@ -173,9 +221,14 @@ struct WeeklyViewData: Identifiable {
     var type: String
 }
 
-struct WeightEntry: Decodable {
+struct MonthlyViewData: Identifiable {
+    var id = UUID().uuidString
+    var month: String
+    var value: Double
+    var type: String
+}
 
-    
+struct WeightEntry: Decodable {
     let date: String
     let weight: Double
 }
