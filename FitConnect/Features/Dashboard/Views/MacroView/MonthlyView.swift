@@ -31,13 +31,12 @@ struct MonthlyView: View {
                                     .foregroundColor(.white)
                                     .cornerRadius(10)
                             }
-                            .id(year) // Assign ID for ScrollViewReader
+                            .id(year) 
                         }
                     }
                     .padding()
                 }
                 .onAppear {
-                        // Scroll to the last year (most recent) when the view appears
                     if let lastYear = yearRange.last {
                         scrollView.scrollTo(lastYear, anchor: .trailing)
                     }
@@ -49,23 +48,30 @@ struct MonthlyView: View {
                 ForEach(fitConnect.monthlySummaryData, id: \.id) { data in
                     BarMark(
                         x: .value("Month", String(data.month.prefix(3))),
-                        y: .value("Value", data.value)
+                        y: .value("Value", data.value  )
                     )
-                    .annotation(position: .overlay) {
-                        Text(String(format: "%.1f", data.value))
-                            .foregroundColor(.white)
-                    }
                     .foregroundStyle(by: .value("Type", data.type))
                 }
+                
             }
-            .chartYScale(range: .plotDimension(padding: 60))
             .padding()
             List {
                 ForEach(groupedData(), id: \.id) { monthlySummary in
                     Section(header: Text(monthlySummary.month)) {
                         ForEach(monthlySummary.entries, id: \.id) { entry in
                             HStack {
-                                Text(entry.type)
+                                switch entry.type {
+                                    case "Carbs":
+                                        detail(iconName: "tennis.racket.circle", nutrientColor: .blue, text: "Carbs")
+                                    case "Protein":
+                                        detail(iconName: "leaf.fill", nutrientColor: .green, text: "Protein")
+                                    case "Fat":
+                                        detail(iconName: "flame.fill", nutrientColor: .yellow, text: "Fat")
+                                        
+                                    default:
+                                        Text(entry.type).foregroundColor(.red)
+                                }
+                                
                                 Spacer()
                                 Text("\(entry.value, specifier: "%.1f") calories")
                             }
@@ -73,7 +79,7 @@ struct MonthlyView: View {
                     }
                 }
             }
-        
+            .navigationTitle("Monthly Summary")
         }
             // This ensures the picker updates the chart when a new year is selected.
         .onAppear {
@@ -81,6 +87,18 @@ struct MonthlyView: View {
             if fitConnect.selectedMacroYear.isEmpty {
                 fitConnect.selectedMacroYear = String(Calendar.current.component(.year, from: Date()))
             }
+        }
+    }
+    
+    private func detail(iconName: String, nutrientColor: Color, text: String) -> some View {
+        HStack {
+            Image(systemName: iconName)
+                .foregroundColor(nutrientColor)
+                .accessibilityHidden(true)
+            
+            Text(text)
+                .foregroundColor(nutrientColor)
+            
         }
     }
 }

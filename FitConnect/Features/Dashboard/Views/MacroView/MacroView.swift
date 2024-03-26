@@ -36,11 +36,14 @@ struct MacroView: View {
                 }
                 .navigationBarTitle("Macro Intake", displayMode: .inline)
                 .toolbar {
-                    ToolbarItem {
-                        Button("Add Data") {
-                            showingForm = true
+                    if timeFrameSelection == "Daily"{
+                        ToolbarItem {
+                            Button("Add Data") {
+                                showingForm = true
+                            }
                         }
                     }
+                    
                 }
                 .sheet(isPresented: $showingForm) {
                         // Assuming AddMacro needs these states, they should be declared within it

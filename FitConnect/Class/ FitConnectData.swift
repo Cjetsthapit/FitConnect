@@ -70,15 +70,16 @@ class FitConnectData: ObservableObject {
             let monthSymbol = calendar.monthSymbols[monthIndex - 1]
             
                 // Appending MonthlyViewData for each nutrient type
-            ["Protein", "Carb", "Fat"].forEach { nutrient in
+            ["Carbs", "Protein", "Fat"].forEach { nutrient in
                 let value: Double
                 switch nutrient {
+                   
+                    case "Carbs":
+                        value = Double(monthlyCarb * 4)
                     case "Protein":
-                        value = monthlyProtein
-                    case "Carb":
-                        value = monthlyCarb
+                        value = Double(monthlyProtein * 4) 
                     case "Fat":
-                        value = monthlyFat
+                        value = Double(monthlyFat * 8)
                     default:
                         value = 0 // This case should never be hit due to the hardcoded types
                 }
