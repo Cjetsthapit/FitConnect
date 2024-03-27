@@ -9,13 +9,16 @@ struct AddMacro: View {
     @Binding var showingForm: Bool
     @EnvironmentObject var fitConnect: FitConnectData
     
+    private var today: Date{
+        return Calendar.current.startOfDay(for: Date())
+    }
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Food Details")) {
                     TextField("Food Name", text: $foodName)
                         .padding()
-                    DatePicker("Date", selection: $date, displayedComponents: .date)
+                    DatePicker("Date", selection: $date,  in: ...today, displayedComponents: .date)
                         .padding()
                 }
                 Section {
