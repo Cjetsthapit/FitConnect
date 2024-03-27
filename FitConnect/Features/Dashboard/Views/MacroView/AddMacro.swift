@@ -66,6 +66,7 @@ struct AddMacro: View {
             ])
             fitConnect.fetchFitConnectData()
             fitConnect.filterMacroIntakes()
+            fitConnect.selectedMacroYear = String(Calendar.current.component(.year, from: Date()))
             print("Firestore data addition successful")
         } catch {
             throw error

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct IndexView: View {
+    @EnvironmentObject var fitConnect: FitConnectData
+    
     var body: some View {
         NavigationView {
             
@@ -24,7 +26,7 @@ struct IndexView: View {
                         
                     }
                     .padding()
-                }.navigationTitle("Hello User")
+                }.navigationTitle("Hello \(fitConnect.fitConnectData?.fullName ?? "Guest")")
             }
         }
         

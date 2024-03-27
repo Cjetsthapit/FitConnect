@@ -81,12 +81,8 @@ struct MonthlyView: View {
             }
             .navigationTitle("Monthly Summary")
         }
-            // This ensures the picker updates the chart when a new year is selected.
         .onAppear {
-                // Optionally, set an initial year if needed
-            if fitConnect.selectedMacroYear.isEmpty {
                 fitConnect.selectedMacroYear = String(Calendar.current.component(.year, from: Date()))
-            }
         }
     }
     
