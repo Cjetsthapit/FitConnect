@@ -24,6 +24,11 @@ extension Date{
         let oneMonth = calendar.date(byAdding: .month, value: -1, to: Date())
         return calendar.startOfDay(for: oneMonth!)
     }
+    static var oneWeekAgo: Date {
+        let calendar = Calendar.current
+        let oneWeek = calendar.date(byAdding: .weekday, value: -1, to: Date())
+        return calendar.startOfDay(for: oneWeek!)
+    }
 }
 
 class HealthManager: ObservableObject{
@@ -32,6 +37,7 @@ class HealthManager: ObservableObject{
     @Published var activities: [String: Activity] = [:]
     
     @Published var oneMonthChartData = [DailyStepView]()
+    @Published var oneWeekChartData = [DailyStepView]()
     
     //MockActivities for testing purpose
     @Published var mockActivities: [String: Activity] = [
@@ -195,6 +201,13 @@ extension HealthManager{
         fetchDailySteps(startDate: .oneMonthAgo){dailySteps in
             DispatchQueue.main.async {
                 self.oneMonthChartData = dailySteps
+            }
+        }
+    }
+    func fetchPastWeekStepData(){
+        fetchDailySteps(startDate: .oneWeekAgo){dailySteps in
+            DispatchQueue.main.async {
+                self.oneWeekChartData = dailySteps
             }
         }
     }

@@ -23,6 +23,7 @@ enum ChartOptions{
     case oneYear
 }
 
+
 struct ChartView: View {
     @EnvironmentObject var manager: HealthManager
     @State var selectedChat: ChartOptions = .oneMonth
@@ -85,10 +86,23 @@ struct ChartView: View {
             }
             
         }
-        .onAppear(){
-            print(manager.oneMonthChartData)
-        }
-    
+        .onAppear() {
+                    if selectedChat == .oneWeek {
+                        print(manager.oneWeekChartData)
+                    } else if selectedChat == .oneMonth {
+                        print(manager.oneMonthChartData)
+                    } else if selectedChat == .threeMonth {
+                        print("3M button is clicked")
+                    } else if selectedChat == .yearToDate {
+                        print("YTD button is clicked")
+                    } else if selectedChat == .oneYear {
+                        print("1Y button is clicked")
+                    }
+                }
+//        .onAppear(){
+//            print(manager.oneMonthChartData)
+//        }
+//    
     }
 }
 
