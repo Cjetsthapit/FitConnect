@@ -8,14 +8,13 @@
 import SwiftUI
 import Charts
 
-
 struct DailyStepView: Identifiable {
     let id = UUID()
     let date: Date
     let stepCount: Double
 }
 
-enum ChartOptions{
+enum ChartOptions {
     case oneWeek
     case oneMonth
     case threeMonth
@@ -23,90 +22,102 @@ enum ChartOptions{
     case oneYear
 }
 
-
 struct ChartView: View {
     @EnvironmentObject var manager: HealthManager
-    @State var selectedChat: ChartOptions = .oneMonth
+    @State var selectedChart: ChartOptions = .oneMonth
+    
     var body: some View {
-        VStack(spacing: 12){
-            Chart{
-                ForEach(manager.oneMonthChartData) { daily in
+        VStack(spacing: 12) {
+            Chart {
+                ForEach(chartData()) { daily in
                     BarMark(x: .value(daily.date.formatted(), daily.date, unit: .day), y: .value("Steps", daily.stepCount))
                 }
             }
             .foregroundColor(.green)
             .frame(height: 350)
             .padding(.horizontal)
-            HStack{
-                Button("1W"){
+            
+            HStack {
+                Button("1W") {
                     withAnimation {
-                        selectedChat = .oneWeek
+                        selectedChart = .oneWeek
+                        manager.fetchPastWeekStepData()
                     }
                 }
                 .padding(.all)
-                .foregroundColor(selectedChat == .oneWeek ? .white : .green)
-                .background(selectedChat == .oneWeek ? .green : .clear)
+                .foregroundColor(selectedChart == .oneWeek ? .white : .green)
+                .background(selectedChart == .oneWeek ? .green : .clear)
                 .cornerRadius(10)
-                Button("1M"){
+                
+                Button("1M") {
                     withAnimation {
-                        selectedChat = .oneMonth
+                        selectedChart = .oneMonth
+                        manager.fetchPastMonthStepData()
                     }
                 }
                 .padding(.all)
-                .foregroundColor(selectedChat == .oneMonth ? .white : .green)
-                .background(selectedChat == .oneMonth ? .green : .clear)
+                .foregroundColor(selectedChart == .oneMonth ? .white : .green)
+                .background(selectedChart == .oneMonth ? .green : .clear)
                 .cornerRadius(10)
-                Button("3M"){
+                
+                Button("3M") {
                     withAnimation {
-                        selectedChat = .threeMonth
+                        selectedChart = .threeMonth
+                        manager.fetchThreeMonthStepData()
                     }
                 }
                 .padding(.all)
-                .foregroundColor(selectedChat == .threeMonth ? .white : .green)
-                .background(selectedChat == .threeMonth ? .green : .clear)
+                .foregroundColor(selectedChart == .threeMonth ? .white : .green)
+                .background(selectedChart == .threeMonth ? .green : .clear)
                 .cornerRadius(10)
-                Button("YTD"){
+                
+                Button("YTD") {
                     withAnimation {
-                        selectedChat = .yearToDate
+                        selectedChart = .yearToDate
+                        manager.fetchYearToDateStepData()
                     }
                 }
                 .padding(.all)
-                .foregroundColor(selectedChat == .yearToDate ? .white : .green)
-                .background(selectedChat == .yearToDate ? .green : .clear)
+                .foregroundColor(selectedChart == .yearToDate ? .white : .green)
+                .background(selectedChart == .yearToDate ? .green : .clear)
                 .cornerRadius(10)
-                Button("1Y"){
+                
+                Button("1Y") {
                     withAnimation {
-                        selectedChat = .oneYear
+                        selectedChart = .oneYear
+                        manager.fetchPastYearStepData()
                     }
                 }
                 .padding(.all)
-                .foregroundColor(selectedChat == .oneYear ? .white : .green)
-                .background(selectedChat == .oneYear ? .green : .clear)
+                .foregroundColor(selectedChart == .oneYear ? .white : .green)
+                .background(selectedChart == .oneYear ? .green : .clear)
                 .cornerRadius(10)
             }
-            
         }
-        .onAppear() {
-                    if selectedChat == .oneWeek {
-                        print(manager.oneWeekChartData)
-                    } else if selectedChat == .oneMonth {
-                        print(manager.oneMonthChartData)
-                    } else if selectedChat == .threeMonth {
-                        print("3M button is clicked")
-                    } else if selectedChat == .yearToDate {
-                        print("YTD button is clicked")
-                    } else if selectedChat == .oneYear {
-                        print("1Y button is clicked")
-                    }
-                }
-//        .onAppear(){
-//            print(manager.oneMonthChartData)
-//        }
-//    
+        .onChange(of: selectedChart) { newValue in
+            // Handle additional changes if needed
+        }
+    }
+    
+    private func chartData() -> [DailyStepView] {
+        switch selectedChart {
+        case .oneWeek:
+            return manager.oneWeekChartData
+        case .oneMonth:
+            return manager.oneMonthChartData
+        case .threeMonth:
+            return manager.ThreeMonthChartData
+        case .yearToDate:
+            return manager.YearToDateChartData
+        case .oneYear:
+            return manager.OneYearChartData
+        }
     }
 }
 
-#Preview {
-    ChartView()
-        .environmentObject(HealthManager())
+struct ChartView_Previews: PreviewProvider {
+    static var previews: some View {
+        ChartView()
+            .environmentObject(HealthManager())
+    }
 }

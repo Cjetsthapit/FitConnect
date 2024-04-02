@@ -29,8 +29,23 @@ extension Date{
         let oneWeek = calendar.date(byAdding: .weekday, value: -1, to: Date())
         return calendar.startOfDay(for: oneWeek!)
     }
+    static var ThreeMonthAgo: Date {
+        let calendar = Calendar.current
+        let oneWeek = calendar.date(byAdding: .month, value: -3, to: Date())
+        return calendar.startOfDay(for: oneWeek!)
+    }
+    static var OneYearAgo: Date {
+        let calendar = Calendar.current
+        let oneWeek = calendar.date(byAdding: .year, value: -1, to: Date())
+        return calendar.startOfDay(for: oneWeek!)
+        
+    }
+    static var YearToDate: Date {
+        let calendar = Calendar.current
+        let oneWeek = calendar.date(byAdding: .yearForWeekOfYear, value: -1, to: Date())
+        return calendar.startOfDay(for: oneWeek!)
+    }
 }
-
 class HealthManager: ObservableObject{
     let healthStore = HKHealthStore()
     
@@ -38,6 +53,9 @@ class HealthManager: ObservableObject{
     
     @Published var oneMonthChartData = [DailyStepView]()
     @Published var oneWeekChartData = [DailyStepView]()
+    @Published var ThreeMonthChartData = [DailyStepView]()
+    @Published var OneYearChartData = [DailyStepView]()
+    @Published var YearToDateChartData = [DailyStepView]()
     
     //MockActivities for testing purpose
     @Published var mockActivities: [String: Activity] = [
@@ -65,6 +83,10 @@ class HealthManager: ObservableObject{
                 fetchTodayCalories()
                 fetchCurrentWeekWorkoutStat()
                 fetchPastMonthStepData()
+                fetchPastWeekStepData()
+                fetchThreeMonthStepData()
+                fetchPastYearStepData()
+                fetchYearToDateStepData()
             }catch{
                 print ("error fetching health data")
             }
@@ -208,6 +230,27 @@ extension HealthManager{
         fetchDailySteps(startDate: .oneWeekAgo){dailySteps in
             DispatchQueue.main.async {
                 self.oneWeekChartData = dailySteps
+            }
+        }
+    }
+    func fetchThreeMonthStepData(){
+        fetchDailySteps(startDate: .ThreeMonthAgo){dailySteps in
+            DispatchQueue.main.async {
+                self.ThreeMonthChartData = dailySteps
+            }
+        }
+    }
+    func fetchPastYearStepData(){
+        fetchDailySteps(startDate: .OneYearAgo){dailySteps in
+            DispatchQueue.main.async {
+                self.OneYearChartData = dailySteps
+            }
+        }
+    }
+    func fetchYearToDateStepData(){
+        fetchDailySteps(startDate: .oneMonthAgo){dailySteps in
+            DispatchQueue.main.async {
+                self.YearToDateChartData = dailySteps
             }
         }
     }
