@@ -8,6 +8,9 @@ struct AddMacro: View {
     @State private var date: Date = Date()
     @Binding var showingForm: Bool
     @EnvironmentObject var fitConnect: FitConnectData
+    @State private var showingErrorPopover = false
+    @State private var errorMessage = ""
+    @State private var isSubmitting = false
     
     private var today: Date{
         return Calendar.current.startOfDay(for: Date())
@@ -24,7 +27,7 @@ struct AddMacro: View {
                 Section {
                     Button("Submit") {
                         submitData()
-                    }
+                    }.disabled(isSubmitting)
                     .padding()
                 }
             }
@@ -32,10 +35,17 @@ struct AddMacro: View {
             .navigationBarItems(trailing: Button("Cancel") {
                 self.showingForm = false
             })
+            .alert("Error", isPresented: $showingErrorPopover) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text(errorMessage)
+            }
+            
         }
     }
     
     func submitData() {
+        isSubmitting = true
         Task {
             do {
                 print("Food is ", foodName)
@@ -43,9 +53,11 @@ struct AddMacro: View {
                 try await addMacro(macro: resp, date: date)
                 showingForm = false
             } catch {
-                print(error.localizedDescription)
+                errorMessage = error.localizedDescription
+                showingErrorPopover = true
             }
         }
+        isSubmitting = false
     }
     
     func addMacro(macro: MacroResponse, date: Date) async throws {
