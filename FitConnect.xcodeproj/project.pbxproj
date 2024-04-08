@@ -174,6 +174,7 @@
 				5A136DA22B6C821F001DD7DF /* FitConnectTests */,
 				5A136DAC2B6C821F001DD7DF /* FitConnectUITests */,
 				5A136D902B6C821E001DD7DF /* Products */,
+				5A5707C22BC3696A000C5358 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -308,6 +309,13 @@
 				5A20FB712B8419DA0086E00D /*  FitConnectData.swift */,
 			);
 			path = Class;
+			sourceTree = "<group>";
+		};
+		5A5707C22BC3696A000C5358 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		5A8ECB232B7DC76E00D43B74 /* Services */ = {

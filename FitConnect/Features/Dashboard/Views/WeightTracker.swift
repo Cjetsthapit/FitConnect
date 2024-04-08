@@ -36,6 +36,9 @@ struct WeightTracker: View {
                                 .foregroundStyle(.red)
                             }
                         }
+                    Text((fitConnect.fitConnectData?.weightGoal)!)
+         
+
                     List {
                         ForEach(0..<sortedWeightsForList.count, id: \.self) { index in
                             HStack {
@@ -48,19 +51,30 @@ struct WeightTracker: View {
                                     let currentWeight = sortedWeightsForList[index].value.weight
                                     let previousWeight = sortedWeightsForList[index + 1].value.weight
                                     let difference = currentWeight - previousWeight
+                                    let goal = fitConnect.fitConnectData?.weightGoal
                                     Group {
                                         Image(systemName: difference > 0 ? "arrow.up" : difference < 0 ? "arrow.down" : "minus")
-                                            .foregroundColor(difference > 0 ? .green : difference < 0 ? .red : .gray)
+                                            .foregroundColor(getArrowColor(difference: difference, weightGoal: goal))
                                         if difference != 0 {
                                             Text(String(format: "%.2f", abs(difference)))
-                                                .foregroundColor(difference > 0 ? .green : .red)
+                                                .foregroundColor(getArrowColor(difference: difference, weightGoal: goal))
                                         }
                                     }
+//                                    Group {
+//                                        Image(systemName: difference > 0 ? "arrow.up" : difference < 0 ? "arrow.down" : "minus")
+//                                            .foregroundColor(difference > 0 ? .green : difference < 0 ? .red : .gray)
+//                                        if difference != 0 {
+//                                            Text(String(format: "%.2f", abs(difference)))
+//                                                .foregroundColor(difference > 0 ? .green : .red)
+//                                        }
+//                                    }
                                 } else {
                                         // For the last item in the list, there's no previous day to compare to
                                     Image(systemName: "minus")
                                         .foregroundColor(.gray)
                                 }
+                                
+                                
                             }
                         }
                     }
@@ -93,11 +107,23 @@ struct WeightTracker: View {
             }
         }
     }
+   
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEEE" // Day name in week
         return formatter
     }()
+}
+
+func getArrowColor(difference: Double, weightGoal: String?) -> Color {
+    switch weightGoal {
+        case "Lose Weight":
+            return difference < 0 ? .green : .red
+        case "Gain Weight":
+            return difference > 0 ? .green : .red
+        default:
+            return .gray
+    }
 }
 
 

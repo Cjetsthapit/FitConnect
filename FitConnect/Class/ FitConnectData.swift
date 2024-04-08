@@ -196,6 +196,7 @@ struct FitConnectResponse: Decodable{
     let weight: Double
     let gender: String
     let dob: Date?
+    let weightGoal: String?
     let food: [Macro]?
     let macroLimit: MacroLimitSettings
     let weights: [String: WeightEntry]?

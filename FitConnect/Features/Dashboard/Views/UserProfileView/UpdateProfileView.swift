@@ -15,6 +15,9 @@ struct UpdateProfileView: View {
     @State private var newWeightString = ""
     @Binding var isShowingUpdateProfile: Bool
     
+
+    @State private var selectedWeightGoalIndex = 0
+    let weightGoals = ["Lose Weight", "Gain Weight"]
     @State private var validationMessage = ""
 
     var body: some View {
@@ -56,7 +59,16 @@ struct UpdateProfileView: View {
                                 .keyboardType(.decimalPad)
                         }
                     }
+                    Section(header: Text("Fitness Goal")) {
+                        Picker("Goal", selection: $selectedWeightGoalIndex) {
+                            ForEach(0 ..< weightGoals.count, id: \.self) {
+                                Text(self.weightGoals[$0])
+                            }
+                        }
+                    }
                 }
+                
+                
                 
                 Button("Update Profile") {
                     updateProfile()
@@ -84,6 +96,11 @@ struct UpdateProfileView: View {
         newContactNumber = fitConnect.fitConnectData?.contactNumber ?? ""
         newHeightString = fitConnect.fitConnectData?.height.formattedString() ?? ""
         newWeightString = fitConnect.fitConnectData?.weight.formattedString() ?? ""
+        
+        if let currentGoal = fitConnect.fitConnectData?.weightGoal,
+           let index = weightGoals.firstIndex(of: currentGoal) {
+            selectedWeightGoalIndex = index
+        }
     }
 
     private func updateProfile() {
@@ -110,6 +127,8 @@ struct UpdateProfileView: View {
         if let newWeight = Double(newWeightString) {
             updatedData["weight"] = newWeight
         }
+        
+        updatedData["weightGoal"] = weightGoals[selectedWeightGoalIndex]
 
         let db = Firestore.firestore()
         let userRef = db.collection("users").document(userId)

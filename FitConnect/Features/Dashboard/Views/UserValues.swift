@@ -18,6 +18,8 @@ struct UserValues: View {
     @State private var isWeightValid = true
     @State private var isDobValid = true // Corrected name to match function
     @EnvironmentObject var fitConnect: FitConnectData
+    @State private var weightGoalIndex = 0
+    let weightGoals = ["Lose Weight", "Gain Weight"]
     
     var body: some View {
 
@@ -83,6 +85,14 @@ struct UserValues: View {
                         }
                     }
                     
+                    Section(header: Text("Fitness Goal")) {
+                        Picker("Goal", selection: $weightGoalIndex) {
+                            ForEach(0 ..< weightGoals.count) {
+                                Text(self.weightGoals[$0])
+                            }
+                        }
+                    }
+                    
                     Button(action: {
                             // Add action for submit button
                         if isFormValid() {
@@ -113,7 +123,8 @@ struct UserValues: View {
                 "height": Double(height) ?? 0,
                 "weight": Double(weight) ?? 0,
                 "gender": sexes[selectedSexIndex],
-                "dob": dob
+                "dob": dob,
+                "weightGoal": weightGoals[weightGoalIndex]
             ]
             Firestore.firestore().collection("users").document(uid).updateData(userData) { error in
                 if let error = error {
