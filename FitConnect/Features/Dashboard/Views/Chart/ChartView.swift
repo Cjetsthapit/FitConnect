@@ -18,7 +18,6 @@ enum ChartOptions {
     case oneWeek
     case oneMonth
     case threeMonth
-    case yearToDate
     case oneYear
 }
 
@@ -71,16 +70,7 @@ struct ChartView: View {
                 .background(selectedChart == .threeMonth ? .green : .clear)
                 .cornerRadius(10)
                 
-                Button("YTD") {
-                    withAnimation {
-                        selectedChart = .yearToDate
-                        manager.fetchYearToDateStepData()
-                    }
-                }
-                .padding(.all)
-                .foregroundColor(selectedChart == .yearToDate ? .white : .green)
-                .background(selectedChart == .yearToDate ? .green : .clear)
-                .cornerRadius(10)
+           
                 
                 Button("1Y") {
                     withAnimation {
@@ -107,8 +97,6 @@ struct ChartView: View {
             return manager.oneMonthChartData
         case .threeMonth:
             return manager.ThreeMonthChartData
-        case .yearToDate:
-            return manager.YearToDateChartData
         case .oneYear:
             return manager.OneYearChartData
         }
